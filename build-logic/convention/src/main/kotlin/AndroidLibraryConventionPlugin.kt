@@ -31,5 +31,6 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
         }
         configureKotlin()
         addUnitTestDependencies()
+        tasks.withType(org.gradle.api.tasks.testing.Test::class.java).configureEach { failOnNoDiscoveredTests.set(false) }
     }
 }

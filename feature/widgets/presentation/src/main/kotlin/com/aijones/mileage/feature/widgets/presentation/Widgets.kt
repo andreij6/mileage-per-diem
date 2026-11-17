@@ -151,14 +151,11 @@ internal fun MonthWidgetContent(month: MonthWidgetUi) {
         Spacer(GlanceModifier.height(10.dp))
         val spoken = context.getString(R.string.widget_odometer_description, "${month.whole.trimStart('0').ifEmpty { "0" }}.${month.tenth}")
         Row(GlanceModifier.semantics { contentDescription = spoken }, verticalAlignment = Alignment.CenterVertically) {
-            month.whole.forEach { digit ->
-                Drum(digit, c.surfaceVariant, c.onSurface)
-                Spacer(GlanceModifier.width(3.dp))
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                month.whole.forEach { digit -> Drum(digit, c.surfaceVariant, c.onSurface, GlanceModifier.padding(end = 3.dp)) }
             }
-            Box(GlanceModifier.size(3.dp).cornerRadius(2.dp).background(c.onSurface)) { }
-            Spacer(GlanceModifier.width(3.dp))
-            Drum(month.tenth.first(), c.primary, c.onPrimary)
-            Spacer(GlanceModifier.width(3.dp))
+            Box(GlanceModifier.padding(end = 3.dp)) { Box(GlanceModifier.size(3.dp).cornerRadius(2.dp).background(c.onSurface)) { } }
+            Drum(month.tenth.first(), c.primary, c.onPrimary, GlanceModifier.padding(end = 3.dp))
             WidgetText(context.getString(R.string.widget_mi), c.onSurface, 8.sp, FontWeight.Medium)
         }
         Spacer(GlanceModifier.defaultWeight())
@@ -167,9 +164,11 @@ internal fun MonthWidgetContent(month: MonthWidgetUi) {
 }
 
 @Composable
-private fun Drum(digit: Char, bg: ColorProvider, ink: ColorProvider) {
-    Box(GlanceModifier.size(12.dp, 20.dp).cornerRadius(3.dp).background(bg), contentAlignment = Alignment.Center) {
-        WidgetText(digit.toString(), ink, 12.sp, FontWeight.Bold)
+private fun Drum(digit: Char, bg: ColorProvider, ink: ColorProvider, outer: GlanceModifier = GlanceModifier) {
+    Box(outer) {
+        Box(GlanceModifier.size(12.dp, 20.dp).cornerRadius(3.dp).background(bg), contentAlignment = Alignment.Center) {
+            WidgetText(digit.toString(), ink, 12.sp, FontWeight.Bold)
+        }
     }
 }
 

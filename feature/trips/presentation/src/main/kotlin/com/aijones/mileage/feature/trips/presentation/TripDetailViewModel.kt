@@ -68,7 +68,7 @@ data class TripDetailUiState(
     val replay: ReplayUi? = null,
 )
 
-private data class Replay(val fraction: Float = 0f, val playing: Boolean = false)
+private data class Replay(val fraction: Float = 1f, val playing: Boolean = false)
 
 @HiltViewModel(assistedFactory = TripDetailViewModel.Factory::class)
 class TripDetailViewModel @AssistedInject constructor(

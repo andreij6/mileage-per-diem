@@ -71,10 +71,10 @@ class TripDetailViewModelTest {
                 s,
             )
             val replay = assertNotNull(s.replay)
-            assertEquals("9:12 AM", replay.time)
+            assertEquals("9:41 AM", replay.time)
             assertEquals("9:12", replay.start)
             assertEquals("9:41", replay.end)
-            assertEquals(0f, replay.fraction)
+            assertEquals(1f, replay.fraction)
             assertEquals(20, replay.speeds.size)
         }
         assertEquals(listOf<AnalyticsEvent>(AnalyticsEvent.ScreenView("trip_detail")), analytics.events)

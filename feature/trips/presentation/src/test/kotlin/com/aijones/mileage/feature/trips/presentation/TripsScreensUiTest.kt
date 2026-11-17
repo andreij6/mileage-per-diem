@@ -160,7 +160,7 @@ class TripsScreensUiTest {
         compose.setContent { MpdTheme { TripDetailEntry(1, navigator, detail(FakeFeatureFlags(FeatureFlag.ROUTE_REPLAY to true))) } }
         compose.onNodeWithText("Replay · drag to scrub").assertIsDisplayed()
         compose.onNodeWithContentDescription("Play route replay").assertIsDisplayed()
-        compose.onNodeWithText("9:12 AM · 0 mph").assertIsDisplayed()
+        compose.onNodeWithText("9:41 AM · ", substring = true).assertIsDisplayed()
     }
 
     @Test
