@@ -271,6 +271,7 @@ private fun CardContent(card: ReviewCardUi, selected: String?, offset: Float, pr
             Text(
                 stringResource(if (business) R.string.trips_stamp_business else R.string.trips_stamp_personal),
                 Modifier
+                    .align(if (business) Alignment.TopStart else Alignment.TopEnd)
                     .padding(16.dp)
                     .graphicsLayer { rotationZ = if (business) 12f else -12f; alpha = progress }
                     .clip(RoundedCornerShape(10.dp))
