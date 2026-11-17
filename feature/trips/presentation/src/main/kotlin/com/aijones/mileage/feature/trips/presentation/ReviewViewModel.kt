@@ -70,13 +70,16 @@ class ReviewViewModel @Inject constructor(
     private var busy = false
 
     private val trips = observeTripsNeedingReview()
-    private val topTrack = trips
-        .map { it.firstOrNull()?.id }
+    private val visibleTracks = trips
+        .map { list -> list.take(3).map { it.id } }
         .distinctUntilChanged()
-        .flatMapLatest { id -> if (id == null) flowOf(emptyList()) else observeTrack(id).map { pts -> pts.map { it.point } } }
+        .flatMapLatest { ids ->
+            if (ids.isEmpty()) flowOf(emptyMap())
+            else combine(ids.map { id -> observeTrack(id).map { pts -> id to pts.map { it.point } } }) { it.toMap() }
+        }
 
-    val state: StateFlow<ReviewUiState> = combine(trips, topTrack, undoStack, chosenPurpose) { trips, track, undo, chosen ->
-        val cards = trips.mapIndexed { i, trip -> trip.toCard(if (i == 0) track else emptyList()) }
+    val state: StateFlow<ReviewUiState> = combine(trips, visibleTracks, undoStack, chosenPurpose) { trips, tracks, undo, chosen ->
+        val cards = trips.map { trip -> trip.toCard(tracks[trip.id].orEmpty()) }
         val top = cards.firstOrNull()
         ReviewUiState(
             loading = false,

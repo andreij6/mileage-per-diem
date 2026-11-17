@@ -66,6 +66,8 @@ import com.aijones.mileage.core.designsystem.component.SectionLabel
 import com.aijones.mileage.core.designsystem.component.StatusDot
 import com.aijones.mileage.core.designsystem.icon.MpdIcons
 import com.aijones.mileage.core.designsystem.theme.MpdTheme
+import com.aijones.mileage.core.ui.MotionDirection
+import com.aijones.mileage.core.ui.staggeredEnter
 import com.aijones.mileage.core.designsystem.theme.tnum
 import com.aijones.mileage.core.model.Distance
 import com.aijones.mileage.core.model.Money
@@ -151,19 +153,25 @@ fun ReportsScreen(
                 .padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
-            ScreenTitle(stringResource(R.string.reports_title))
-            Filters(state, onPickRange = { picking = true }, onToggleBusinessOnly = onToggleBusinessOnly)
+            Box(Modifier.staggeredEnter(MotionDirection.Top, 0)) {
+                ScreenTitle(stringResource(R.string.reports_title))
+            }
+            Box(Modifier.staggeredEnter(MotionDirection.End, 35)) {
+                Filters(state, onPickRange = { picking = true }, onToggleBusinessOnly = onToggleBusinessOnly)
+            }
             val report = state.report
             if (report != null) {
-                TotalsCard(report)
-                SectionLabel(stringResource(R.string.reports_included))
-                IncludedList(report, onOpenTrips, onOpenPerDiem)
+                Box(Modifier.staggeredEnter(MotionDirection.Start, 70)) { TotalsCard(report) }
+                Box(Modifier.staggeredEnter(MotionDirection.Bottom, 100)) { SectionLabel(stringResource(R.string.reports_included)) }
+                Box(Modifier.staggeredEnter(MotionDirection.End, 120)) { IncludedList(report, onOpenTrips, onOpenPerDiem) }
             }
-            Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+            Row(Modifier.staggeredEnter(MotionDirection.Bottom, 150), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                 ExportButton(ReportFormat.PDF, state, onExport)
                 ExportButton(ReportFormat.CSV, state, onExport)
             }
-            InfoNote(stringResource(R.string.reports_privacy_note), icon = MpdIcons.ShieldCheck)
+            Box(Modifier.staggeredEnter(MotionDirection.Bottom, 175)) {
+                InfoNote(stringResource(R.string.reports_privacy_note), icon = MpdIcons.ShieldCheck)
+            }
         }
         SnackbarHost(snackbar, Modifier.align(Alignment.BottomCenter))
     }

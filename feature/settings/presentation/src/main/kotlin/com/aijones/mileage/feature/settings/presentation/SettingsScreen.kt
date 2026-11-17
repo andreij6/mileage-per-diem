@@ -2,6 +2,7 @@ package com.aijones.mileage.feature.settings.presentation
 
 import android.content.pm.ApplicationInfo
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -31,6 +32,8 @@ import com.aijones.mileage.core.designsystem.component.ScreenTitle
 import com.aijones.mileage.core.designsystem.component.ValueRow
 import com.aijones.mileage.core.designsystem.icon.MpdIcons
 import com.aijones.mileage.core.designsystem.theme.MpdTheme
+import com.aijones.mileage.core.ui.MotionDirection
+import com.aijones.mileage.core.ui.staggeredEnter
 import com.aijones.mileage.core.featureflags.FeatureFlag
 import com.aijones.mileage.core.model.formatCentsPerMile
 import com.aijones.mileage.feature.settings.domain.BatteryMode
@@ -168,8 +171,11 @@ fun SettingsScreen(
             .padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 24.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
-        ScreenTitle(stringResource(R.string.settings_title))
-        SettingsSection(
+        Box(Modifier.staggeredEnter(MotionDirection.Top, 0)) {
+            ScreenTitle(stringResource(R.string.settings_title))
+        }
+        Box(Modifier.staggeredEnter(MotionDirection.Start, 40)) {
+            SettingsSection(
             stringResource(R.string.settings_section_trips),
             listOf(
                 { ValueRow(stringResource(R.string.settings_default_purpose), icon = MpdIcons.Pencil, value = s.defaultPurpose.ifBlank { notSet }, onClick = { onEdit(SettingsEdit.DEFAULT_PURPOSE) }) },
@@ -181,42 +187,49 @@ fun SettingsScreen(
                 { ValueRow(stringResource(R.string.settings_battery_mode), icon = MpdIcons.BatteryMedium, value = stringResource(s.batteryMode.label), onClick = { onEdit(SettingsEdit.BATTERY_MODE) }) },
             ),
         )
+        }
         if (state.driveDetectionAvailable) {
+            Box(Modifier.staggeredEnter(MotionDirection.End, 75)) {
+                SettingsSection(
+                    stringResource(R.string.settings_section_drive_detection),
+                    listOf {
+                        ValueRow(
+                            stringResource(R.string.settings_drive_detection_title),
+                            Modifier.toggleable(s.driveDetection, role = Role.Switch, onValueChange = onDriveDetection),
+                            icon = MpdIcons.Zap,
+                            subtitle = stringResource(R.string.settings_drive_detection_subtitle),
+                            trailing = { MpdSwitch(s.driveDetection, onCheckedChange = null) },
+                        )
+                    },
+                )
+            }
+        }
+        Box(Modifier.staggeredEnter(MotionDirection.End, 100)) {
             SettingsSection(
-                stringResource(R.string.settings_section_drive_detection),
-                listOf {
-                    ValueRow(
-                        stringResource(R.string.settings_drive_detection_title),
-                        Modifier.toggleable(s.driveDetection, role = Role.Switch, onValueChange = onDriveDetection),
-                        icon = MpdIcons.Zap,
-                        subtitle = stringResource(R.string.settings_drive_detection_subtitle),
-                        trailing = { MpdSwitch(s.driveDetection, onCheckedChange = null) },
-                    )
+                stringResource(R.string.settings_section_reports),
+                listOf(
+                    { ValueRow(stringResource(R.string.settings_report_name), icon = MpdIcons.UserRound, value = s.reportName.ifBlank { notSet }, onClick = { onEdit(SettingsEdit.REPORT_NAME) }) },
+                    { ValueRow(stringResource(R.string.settings_company), icon = MpdIcons.Building2, value = s.company.ifBlank { notSet }, onClick = { onEdit(SettingsEdit.COMPANY) }) },
+                ),
+            )
+        }
+        Box(Modifier.staggeredEnter(MotionDirection.Bottom, 130)) {
+            SettingsSection(
+                stringResource(R.string.settings_section_app),
+                buildList {
+                    add { ValueRow(stringResource(R.string.settings_theme), icon = MpdIcons.Sun, value = stringResource(s.theme.label), onClick = { onEdit(SettingsEdit.THEME) }) }
+                    add { ValueRow(stringResource(R.string.settings_about), icon = MpdIcons.Info, onClick = onAbout) }
+                    if (debuggable || s.developerUnlocked) {
+                        add {
+                            ValueRow(
+                                stringResource(R.string.settings_developer_options), icon = MpdIcons.Settings,
+                                value = pluralStringResource(R.plurals.settings_flag_count, state.flagCount, state.flagCount), onClick = onDeveloperOptions,
+                            )
+                        }
+                    }
                 },
             )
         }
-        SettingsSection(
-            stringResource(R.string.settings_section_reports),
-            listOf(
-                { ValueRow(stringResource(R.string.settings_report_name), icon = MpdIcons.UserRound, value = s.reportName.ifBlank { notSet }, onClick = { onEdit(SettingsEdit.REPORT_NAME) }) },
-                { ValueRow(stringResource(R.string.settings_company), icon = MpdIcons.Building2, value = s.company.ifBlank { notSet }, onClick = { onEdit(SettingsEdit.COMPANY) }) },
-            ),
-        )
-        SettingsSection(
-            stringResource(R.string.settings_section_app),
-            buildList {
-                add { ValueRow(stringResource(R.string.settings_theme), icon = MpdIcons.Sun, value = stringResource(s.theme.label), onClick = { onEdit(SettingsEdit.THEME) }) }
-                add { ValueRow(stringResource(R.string.settings_about), icon = MpdIcons.Info, onClick = onAbout) }
-                if (debuggable || s.developerUnlocked) {
-                    add {
-                        ValueRow(
-                            stringResource(R.string.settings_developer_options), icon = MpdIcons.Settings,
-                            value = pluralStringResource(R.plurals.settings_flag_count, state.flagCount, state.flagCount), onClick = onDeveloperOptions,
-                        )
-                    }
-                }
-            },
-        )
     }
     when (state.editing) {
         SettingsEdit.DEFAULT_PURPOSE -> TextEditDialog(stringResource(R.string.settings_default_purpose), s.defaultPurpose, onDismiss, onDefaultPurpose)

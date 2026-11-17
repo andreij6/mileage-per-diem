@@ -1,8 +1,15 @@
 package com.aijones.mileage.feature.trips.presentation
 
 import androidx.annotation.DrawableRes
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -45,6 +52,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.CustomAccessibilityAction
 import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.customActions
 import androidx.compose.ui.semantics.liveRegion
@@ -97,8 +105,16 @@ fun ReviewScreen(
         if (state.loading) return@Column
         ProgressSegments(state)
         Box(Modifier.weight(1f).fillMaxWidth()) {
-            val top = state.top
-            if (top == null) DoneState(onBack) else Deck(state, top, onClassify, onSelectPurpose)
+            AnimatedContent(
+                targetState = state.top,
+                transitionSpec = {
+                    (fadeIn(tween(260)) + scaleIn(tween(260), initialScale = 0.94f)) togetherWith fadeOut(tween(180))
+                },
+                contentKey = { it == null },
+                label = "reviewDeck",
+            ) { top ->
+                if (top == null) DoneState(onBack) else Deck(state, top, onClassify, onSelectPurpose)
+            }
         }
         Row(
             Modifier.fillMaxWidth().padding(top = 16.dp),
@@ -139,7 +155,8 @@ private fun ProgressSegments(state: ReviewUiState) {
         horizontalArrangement = Arrangement.spacedBy(6.dp),
     ) {
         repeat(state.total) { i ->
-            Box(Modifier.weight(1f).height(4.dp).clip(RoundedCornerShape(2.dp)).background(if (i <= state.reviewed) c.primary else c.outline))
+            val segColor by animateColorAsState(if (i <= state.reviewed) c.primary else c.outline, tween(240), label = "seg$i")
+            Box(Modifier.weight(1f).height(4.dp).clip(RoundedCornerShape(2.dp)).background(segColor))
         }
     }
 }
@@ -157,18 +174,28 @@ private fun Deck(state: ReviewUiState, top: ReviewCardUi, onClassify: (TripCateg
         val progress = (abs(offsetX.value) / (widthPx * SWIPE_THRESHOLD)).coerceIn(0f, 1f)
         val behind = (state.cards.size - 1).coerceAtMost(2)
         for (i in behind downTo 1) {
+            val card = state.cards[i]
             val base = if (i == 2) 0.88f else 0.94f
-            val scale = base + (if (i == 1) 0.06f * progress else 0f)
+            val scale = base + (0.06f * progress)
             val dy = if (i == 2) 34.dp else 18.dp
-            Box(
+            Column(
                 Modifier
-                    .offset(y = dy + 40.dp * (1 - scale) - 220.dp * (1 - scale))
-                    .graphicsLayer { scaleX = scale; scaleY = scale }
-                    .size(width = CARD_WIDTH, height = CARD_HEIGHT)
+                    .offset(y = dy + 220.dp * (1 - scale))
+                    .graphicsLayer {
+                        scaleX = scale
+                        scaleY = scale
+                    }
+                    .clearAndSetSemantics {}
+                    .width(CARD_WIDTH)
+                    .heightIn(min = minOf(CARD_HEIGHT, maxHeight), max = maxHeight)
                     .clip(RoundedCornerShape(28.dp))
                     .background(c.surface)
-                    .border(1.dp, c.outline, RoundedCornerShape(28.dp)),
-            )
+                    .border(1.dp, c.outline, RoundedCornerShape(28.dp))
+                    .padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+            ) {
+                CardContent(card, card.purposes.firstOrNull(), offset = 0f, progress = 0f, onSelectPurpose = {})
+            }
         }
         Column(
             Modifier

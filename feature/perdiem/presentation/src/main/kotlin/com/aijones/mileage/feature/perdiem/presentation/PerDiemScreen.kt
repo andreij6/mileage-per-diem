@@ -51,6 +51,8 @@ import com.aijones.mileage.core.designsystem.component.ScreenTitle
 import com.aijones.mileage.core.designsystem.icon.MpdIcon
 import com.aijones.mileage.core.designsystem.icon.MpdIcons
 import com.aijones.mileage.core.designsystem.theme.MpdTheme
+import com.aijones.mileage.core.ui.MotionDirection
+import com.aijones.mileage.core.ui.staggeredEnter
 import com.aijones.mileage.core.designsystem.theme.tnum
 import com.aijones.mileage.core.model.Money
 import com.aijones.mileage.core.model.formatUsd
@@ -76,14 +78,18 @@ fun PerDiemScreen(state: PerDiemUiState, onSearch: () -> Unit, onAddStay: (Long)
             .padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 24.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
-        ScreenTitle(stringResource(R.string.perdiem_title), subtitle = stringResource(R.string.perdiem_subtitle, state.fiscalYear))
+        Box(Modifier.staggeredEnter(MotionDirection.Top, 0)) {
+            ScreenTitle(stringResource(R.string.perdiem_title), subtitle = stringResource(R.string.perdiem_subtitle, state.fiscalYear))
+        }
         val label = if (state.isStandard) stringResource(R.string.perdiem_standard_label) else state.locationLabel
-        SearchPill(label, onSearch)
+        Box(Modifier.staggeredEnter(MotionDirection.End, 30)) {
+            SearchPill(label, onSearch)
+        }
         if (state.loading || state.locationId == null) return@Column
         RateCards(state)
-        LodgingChart(state)
-        MieBreakdownCard(state)
-        EstimateHero(state.tripEstimate, onAddStay = { onAddStay(state.locationId) })
+        Box(Modifier.staggeredEnter(MotionDirection.Bottom, 90)) { LodgingChart(state) }
+        Box(Modifier.staggeredEnter(MotionDirection.Start, 120)) { MieBreakdownCard(state) }
+        Box(Modifier.staggeredEnter(MotionDirection.Bottom, 150)) { EstimateHero(state.tripEstimate, onAddStay = { onAddStay(state.locationId) }) }
     }
 }
 
@@ -115,11 +121,11 @@ private fun RateCards(state: PerDiemUiState) {
     Row(Modifier.fillMaxWidth().height(IntrinsicSize.Min), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
         RateCard(
             MpdIcons.BedDouble, c.primaryC, c.onPrimaryC, stringResource(R.string.perdiem_lodging), state.lodgingThisMonth,
-            stringResource(R.string.perdiem_lodging_sub, state.currentMonth.shortName()), Modifier.weight(1f),
+            stringResource(R.string.perdiem_lodging_sub, state.currentMonth.shortName()), Modifier.weight(1f).staggeredEnter(MotionDirection.Start, 60),
         )
         RateCard(
             MpdIcons.Utensils, c.accentC, c.accent, stringResource(R.string.perdiem_mie), state.mieDaily,
-            stringResource(R.string.perdiem_mie_sub), Modifier.weight(1f),
+            stringResource(R.string.perdiem_mie_sub), Modifier.weight(1f).staggeredEnter(MotionDirection.End, 60),
         )
     }
 }

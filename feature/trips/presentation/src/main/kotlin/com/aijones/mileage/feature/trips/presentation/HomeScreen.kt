@@ -48,6 +48,8 @@ import com.aijones.mileage.core.designsystem.component.ScreenTitle
 import com.aijones.mileage.core.designsystem.icon.MpdIcon
 import com.aijones.mileage.core.designsystem.icon.MpdIcons
 import com.aijones.mileage.core.designsystem.theme.MpdTheme
+import com.aijones.mileage.core.ui.MotionDirection
+import com.aijones.mileage.core.ui.staggeredEnter
 import com.aijones.mileage.core.designsystem.theme.tnum
 import com.aijones.mileage.core.navigation.AddTripRoute
 import com.aijones.mileage.core.navigation.AllTripsRoute
@@ -90,18 +92,34 @@ fun HomeScreen(
     ) {
         if (state.loading) return@LazyColumn
         item(key = "title") {
-            ScreenTitle(stringResource(R.string.trips_title), eyebrow = state.month) {
-                if (!state.empty) MpdChip(stringResource(R.string.trips_offline), icon = MpdIcons.CloudOff, outlined = true)
+            Box(Modifier.staggeredEnter(MotionDirection.Top, 0)) {
+                ScreenTitle(stringResource(R.string.trips_title), eyebrow = state.month) {
+                    if (!state.empty) MpdChip(stringResource(R.string.trips_offline), icon = MpdIcons.CloudOff, outlined = true)
+                }
             }
         }
-        item(key = "hero") { HeroCard(state, onStartTrip, onInsights) }
+        item(key = "hero") {
+            Box(Modifier.staggeredEnter(MotionDirection.Start, 40)) {
+                HeroCard(state, onStartTrip, onInsights)
+            }
+        }
         if (state.empty) {
-            item(key = "empty") { EmptyCard(onAddPastTrip) }
+            item(key = "empty") {
+                Box(Modifier.staggeredEnter(MotionDirection.Bottom, 80)) {
+                    EmptyCard(onAddPastTrip)
+                }
+            }
             return@LazyColumn
         }
-        if (state.needsReview > 0) item(key = "review") { ReviewBanner(state.needsReview, onReview) }
+        if (state.needsReview > 0) {
+            item(key = "review") {
+                Box(Modifier.staggeredEnter(MotionDirection.End, 80)) {
+                    ReviewBanner(state.needsReview, onReview)
+                }
+            }
+        }
         item(key = "recentHeader") {
-            Row(Modifier.fillMaxWidth().padding(horizontal = 4.dp), verticalAlignment = Alignment.CenterVertically) {
+            Row(Modifier.fillMaxWidth().padding(horizontal = 4.dp).staggeredEnter(MotionDirection.Bottom, 110), verticalAlignment = Alignment.CenterVertically) {
                 Text(stringResource(R.string.trips_recent), Modifier.weight(1f).semantics { heading() }, style = MpdTheme.type.titleM, color = c.text)
                 Text(
                     stringResource(R.string.trips_see_all),
@@ -112,7 +130,9 @@ fun HomeScreen(
             }
         }
         item(key = "recent") {
-            CardList(rows = state.recent.map { row -> { TripRow(row, homeSubtitle(row), onClick = { onTrip(row.id) }) } })
+            Box(Modifier.staggeredEnter(MotionDirection.Bottom, 140)) {
+                CardList(rows = state.recent.map { row -> { TripRow(row, homeSubtitle(row), onClick = { onTrip(row.id) }) } })
+            }
         }
     }
 }

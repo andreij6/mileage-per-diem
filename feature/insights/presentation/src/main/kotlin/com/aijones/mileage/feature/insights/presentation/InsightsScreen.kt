@@ -54,6 +54,8 @@ import com.aijones.mileage.core.designsystem.component.MpdTopBar
 import com.aijones.mileage.core.designsystem.icon.MpdIcon
 import com.aijones.mileage.core.designsystem.icon.MpdIcons
 import com.aijones.mileage.core.designsystem.theme.MpdTheme
+import com.aijones.mileage.core.ui.MotionDirection
+import com.aijones.mileage.core.ui.staggeredEnter
 import com.aijones.mileage.core.designsystem.theme.tnum
 
 private val LEVEL_ALPHA = floatArrayOf(0f, 0.25f, 0.5f, 0.75f, 1f)
@@ -81,10 +83,12 @@ fun InsightsScreen(state: InsightsUiState, onBack: () -> Unit, onOpenYearInRevie
                 .padding(start = 16.dp, end = 16.dp, top = 0.dp, bottom = 24.dp),
             verticalArrangement = Arrangement.spacedBy(14.dp),
         ) {
-            HeatmapCard(ready.insights)
-            Highlights(ready.insights)
-            WeekdayCard(ready.insights.weekdays)
-            ready.yearCard?.let { YearCard(it, onOpen = { onOpenYearInReview(it.year) }) }
+            Box(Modifier.staggeredEnter(MotionDirection.Top, 30)) { HeatmapCard(ready.insights) }
+            Box(Modifier.staggeredEnter(MotionDirection.Start, 75)) { Highlights(ready.insights) }
+            Box(Modifier.staggeredEnter(MotionDirection.End, 110)) { WeekdayCard(ready.insights.weekdays) }
+            ready.yearCard?.let {
+                Box(Modifier.staggeredEnter(MotionDirection.Bottom, 145)) { YearCard(it, onOpen = { onOpenYearInReview(it.year) }) }
+            }
         }
     }
 }

@@ -126,6 +126,7 @@ Requires JDK 17 and an Android SDK with API 37 (compile) and 36 (target).
 - **Listing copy, icon, feature graphic, 8 screenshots of the real app:** [`store-listing/`](store-listing/PLAY_STORE_LISTING.md)
 - **Signed release builds:** upload key from a git-ignored `keystore.properties`; `bundleRelease` refuses to build without it ([`docs/RELEASING.md`](docs/RELEASING.md))
 - **Research:** a cited publishing guide covering the developer account, 12-tester closed test, target API 36, and foreground-service and location rules: [`docs/PLAY_PUBLISHING.md`](docs/PLAY_PUBLISHING.md)
+- **Delights:** directional page-entry choreography, Navigation 3 transitions, and swipe-deck physics: [`docs/DELIGHTS.md`](docs/DELIGHTS.md)
 
 ## Repository map
 ```
