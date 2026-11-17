@@ -1,182 +1,139 @@
 <div align="center">
 
-<img src="store-listing/assets/feature_graphic_1024x500.png" alt="Mileage & Per Diem Feature Graphic" width="100%" />
-
-<br /><br />
-
-<img src="store-listing/assets/play_store_icon_512x512.png" alt="Mileage & Per Diem App Icon" width="96" />
+<img src="store-listing/assets/feature_graphic_1024x500.png" alt="Mileage & Per Diem" width="100%" />
 
 # Mileage & Per Diem
 
-**An on-device Android business mileage & GSA per diem tracker — designed, architected, and built by conducting coding agents.**
+**An offline-first Android app that logs business drives with GPS, prices them at the IRS rate in effect on the day, adds U.S. government per diems, and exports expense reports. Everything stays on the phone.**
 
-[![Built with Claude & Gemini Hydrogen](https://img.shields.io/badge/Built%20with-Claude%20%26%20Gemini%20Hydrogen-0D6B5B?style=for-the-badge)](AGENTS.md)
-[![100% On-Device](https://img.shields.io/badge/Network-No%20INTERNET%20Permission-5FD8BE?style=for-the-badge&labelColor=05302A)](app/src/main/AndroidManifest.xml)
-[![Play Store Ready](https://img.shields.io/badge/Google%20Play-Listing%20%26%20Assets%20Ready-F5B85A?style=for-the-badge&labelColor=05302A)](store-listing/PLAY_STORE_LISTING.md)
+By **AI.Jones** · Kotlin · Jetpack Compose · MVVM · Coroutines/Flow · Hilt · Room · Navigation 3
+
+![Kotlin](https://img.shields.io/badge/Kotlin-2.4-7F52FF?logo=kotlin&logoColor=white)
+![Compose](https://img.shields.io/badge/Jetpack%20Compose-Material%203-0D6B5B)
+![Modules](https://img.shields.io/badge/Gradle%20modules-37-0D6B5B)
+![Tests](https://img.shields.io/badge/unit%20tests-279%20passing-1B7F3B)
+![Startup](https://img.shields.io/badge/cold%20start-272%20ms-F5B85A)
+![APK](https://img.shields.io/badge/release%20APK-3.0%20MB-F5B85A)
+![Network](https://img.shields.io/badge/INTERNET%20permission-none-05302A)
+[![Built with Claude & Gemini Hydrogen](https://img.shields.io/badge/Built%20with-Claude%20%26%20Gemini%20Hydrogen-0D6B5B)](docs/README.md)
 
 </div>
 
+> ### The 30-second version
+> - **A real product problem with real constraints.** It records GPS drives under Google Play's location policy (no background location), costs them at an IRS rate that **changed mid-year** (72.5¢ → 76¢ on Jul 1, 2026), and bundles **real FY2027 GSA per diem rates** for 298 locations, all without a backend.
+> - **Production-grade Android architecture.** 37 feature modules in clean-architecture layers, use cases, unidirectional data flow, Hilt and Navigation 3, with the dependency rules enforced in the build.
+> - **Measured performance.** **272 ms** cold start (median, Baseline Profile), checked by Macrobenchmark against a **600 ms budget the build enforces**, and a **3.0 MB** release APK.
+> - **Craft and quality.** A designed odometer, route replay, slide-to-end, a printed receipt, a swipe deck, story cards, home-screen widgets and a Quick Settings tile. **279 behaviour tests using fakes**, on-device analytics with an app-health dashboard, and feature flags.
+> - **A modern way of working.** Designed in FigCraft first and decided in 18 ADRs, then built by parallel coding agents working under written rules (`AGENTS.md`) and checked screen by screen on an emulator.
+
 ---
 
-## Why This Project Exists
+## The app, running
+<sub>Screenshots from the API 36 emulator.</sub>
 
-This repository is a **showcase of conducting AI coding agents — Claude and Gemini Hydrogen — to build a complete, production-grade Android application from scratch and prepare it for publishing to the Google Play Store.**
-
-From clean-architecture multi-module Kotlin/Jetpack Compose engineering and FigCraft UI design renders to adaptive launcher icons and Play Store listing assets, the project demonstrates how multiple specialized agents can be orchestrated around strict architectural guardrails (`AGENTS.md`), design tokens, and Play Store policy requirements.
-
----
-
-## Visual Tour
-
-### Play Store Screenshots
-
-<div align="center">
 <table>
   <tr>
-    <td align="center" width="25%">
-      <img src="store-listing/assets/screenshots/01_home_odometer.png" alt="Home & Odometer" width="100%" /><br />
-      <sub><b>Home &amp; Odometer</b></sub>
-    </td>
-    <td align="center" width="25%">
-      <img src="store-listing/assets/screenshots/02_live_tracking.png" alt="Live GPS Tracking" width="100%" /><br />
-      <sub><b>Offline Route Canvas</b></sub>
-    </td>
-    <td align="center" width="25%">
-      <img src="store-listing/assets/screenshots/03_trip_receipt.png" alt="Trip Receipt" width="100%" /><br />
-      <sub><b>Itemized Trip Receipt</b></sub>
-    </td>
-    <td align="center" width="25%">
-      <img src="store-listing/assets/screenshots/04_swipe_review.png" alt="Swipe to Sort" width="100%" /><br />
-      <sub><b>Swipe-to-Sort Deck</b></sub>
-    </td>
+    <td align="center" width="25%"><img src="docs/images/app/home.png" alt="Home" /><br/><sub><b>Home</b> · odometer, month total</sub></td>
+    <td align="center" width="25%"><img src="docs/images/app/live-trip.png" alt="Live trip" /><br/><sub><b>Live trip</b> · slide to end</sub></td>
+    <td align="center" width="25%"><img src="docs/images/app/receipt.png" alt="Receipt" /><br/><sub><b>Receipt</b> · a real 1.4 mi drive</sub></td>
+    <td align="center" width="25%"><img src="docs/images/app/trip-detail.png" alt="Trip detail" /><br/><sub><b>Route replay</b> · speed scrubber</sub></td>
   </tr>
   <tr>
-    <td align="center" width="25%">
-      <img src="store-listing/assets/screenshots/05_per_diem_gsa.png" alt="GSA Per Diem" width="100%" /><br />
-      <sub><b>Bundled GSA Per Diem</b></sub>
-    </td>
-    <td align="center" width="25%">
-      <img src="store-listing/assets/screenshots/06_reports_export.png" alt="Reports Export" width="100%" /><br />
-      <sub><b>PDF &amp; CSV Export</b></sub>
-    </td>
-    <td align="center" width="25%">
-      <img src="store-listing/assets/screenshots/07_monthly_insights.png" alt="Monthly Insights" width="100%" /><br />
-      <sub><b>Monthly Insights</b></sub>
-    </td>
-    <td align="center" width="25%">
-      <img src="store-listing/assets/screenshots/08_widgets_quick_settings.png" alt="Widgets & Quick Settings" width="100%" /><br />
-      <sub><b>Widgets &amp; Quick Settings</b></sub>
-    </td>
+    <td align="center"><img src="docs/images/app/review-deck.png" alt="Review deck" /><br/><sub><b>Swipe to sort</b> business vs personal</sub></td>
+    <td align="center"><img src="docs/images/app/insights.png" alt="Insights" /><br/><sub><b>Insights</b> · miles heatmap</sub></td>
+    <td align="center"><img src="docs/images/app/year-in-review.png" alt="Year in review" /><br/><sub><b>2026 on the road</b> · story cards</sub></td>
+    <td align="center"><img src="docs/images/app/per-diem.png" alt="Per diem" /><br/><sub><b>GSA per diem</b> · bundled FY2027</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/images/app/reports.png" alt="Reports" /><br/><sub><b>Report</b> · PDF &amp; CSV export</sub></td>
+    <td align="center"><img src="docs/images/app/app-health.png" alt="App health" /><br/><sub><b>App health</b> · on-device analytics</sub></td>
+    <td align="center"><img src="docs/images/dark/home.png" alt="Dark home" /><br/><sub><b>Dark theme</b> · every screen</sub></td>
+    <td align="center"><img src="docs/images/dark/trip-detail.png" alt="Dark trip detail" /><br/><sub><b>Dark</b> · trip detail</sub></td>
   </tr>
 </table>
-</div>
 
-### Light & Dark Theme Craft (`design/renders/`)
-
-Every screen is designed in **FigCraft** (`design/mileage-per-diem.figcraft`) with full Light and Dark theme parity.
-
-<div align="center">
 <table>
   <tr>
-    <td align="center" width="50%">
-      <img src="design/renders/overview-trips.png" alt="Trips Overview" width="100%" /><br />
-      <sub><b>Trips &amp; Review Flow</b></sub>
-    </td>
-    <td align="center" width="50%">
-      <img src="design/renders/overview-per-diem.png" alt="Per Diem Overview" width="100%" /><br />
-      <sub><b>Per Diem &amp; Stays</b></sub>
-    </td>
+    <td align="center" width="50%"><img src="docs/images/app/widgets.png" alt="Home-screen widgets" /><br/><sub><b>Glance widgets</b> · month total, today's per diem (plus a Quick Settings tile)</sub></td>
+    <td align="center" width="50%"><img src="docs/images/app/pdf-report.png" alt="PDF report" width="80%" /><br/><sub><b>PDF report</b> · drawn with the platform <code>PdfDocument</code> API, no library</sub></td>
   </tr>
 </table>
-</div>
 
 ---
 
-## Key Features
+## Engineering deep dives
+Short write-ups, each in the folder whose code it explains:
 
-- **100% On-Device & Offline:** Zero backend, zero accounts, and **no `INTERNET` permission** — routes, trips, and reports stay on the phone.
-- **Play-Policy-Compliant GPS Recording:** No `ACCESS_BACKGROUND_LOCATION`. Trips are user-started and recorded in a foreground `location` service (`FusedLocationProviderClient`), with an in-app `RouteCanvas` (no external map SDK).
-- **Effective-Dated IRS Mileage Rates:** Snapshots the applicable IRS rate when a trip is saved (e.g., `72.5¢/mi` Jan–Jun 2026, `76¢/mi` Jul 2026+), plus custom vehicle rates.
-- **Bundled GSA Per Diem Lookup:** Prepackaged `perdiem.db` for offline U.S. city lodging & Meals & Incidentals (M&IE) rates, including the 75% first/last travel day calculation.
-- **Swipe-to-Sort & Printed Receipts:** Classify drives in seconds with a swipe deck and generate itemized trip receipts.
-- **Local PDF & CSV Expense Reports:** Built with `PdfDocument` and RFC 4180 CSV, shared solely via the Android share sheet.
-- **Insights, Stories & Widgets:** Monthly mileage calendar heatmap, shareable "Year on the Road" story cards, Glance home-screen widgets, and a Quick Settings tile.
+| | Topic | What it shows |
+|---|---|---|
+| 🧱 | [**Architecture: feature modules × clean layers**](feature/README.md) | 37 modules, enforced dependency rules, use cases, UDF, Navigation 3, Hilt |
+| 📍 | [**Trip recording that passes Play review**](feature/tracking/README.md) | Location foreground service, battery-aware sampling, GPS filtering, process-death recovery, permission guard |
+| 💵 | [**Money, distance and rates that change mid-year**](core/model/README.md) | `Long` micro-dollars, effective-dated IRS rates, per-trip rate snapshot, GSA 75% rule |
+| 🗄️ | [**Offline GSA per diem via a build-time OpenAPI import**](tools/perdiem-import/README.md) | Contract-first client → 168 KB SQLite asset → Room `createFromAsset` + FTS4 |
+| 🎨 | [**From FigCraft design to Compose**](core/designsystem/README.md) | Design tokens, components, odometer, route canvas, slide-to-end, receipt, accessibility |
+| ⚡ | [**Performance: a startup budget the build enforces**](benchmark/README.md) | Macrobenchmark, Baseline + startup profiles, a 600 ms gate, 3.0 MB APK |
+| 📊 | [**Analytics, app health and feature flags without a backend**](core/analytics/README.md) | Typed events, ring-buffer sink, dashboard spec, flags with overrides |
+| 🧪 | [**Testing behaviour with fakes, not mocks**](core/testing/README.md) | 279 tests by layer, `testFixtures` fakes, Turbine, Robolectric Compose tests |
+| 🤖 | [**How it was built: design-first, with coding agents**](docs/README.md) | Research → designs → ADRs → rules for agents → parallel feature agents → device checks |
 
 ---
 
-## Architecture
-
-The codebase follows a strict **Clean Architecture + MVVM / Unidirectional Data Flow (UDF)** split across feature and core modules, governed by repo-wide and module-level `AGENTS.md` contracts.
-
+## Architecture at a glance
 ```mermaid
 flowchart TB
-  App["app (Hilt Graph, NavDisplay, MainActivity)"]
-
-  subgraph Features["feature:* (onboarding, trips, tracking, perdiem, reports, insights, widgets, settings)"]
-    Pres["presentation (Compose Screens, ViewModels, StateFlow)"]
-    Dom["domain (Pure JVM Kotlin Use Cases & Repository Interfaces)"]
-    Data["data (Room / DataStore / Platform Implementations, @Binds)"]
-    Pres --> Dom
-    Data --> Dom
+  APP["app · Hilt graph · NavDisplay"]
+  subgraph F["8 features: onboarding · trips · tracking · perdiem · reports · insights · settings · widgets"]
+    P["presentation<br/>Compose + ViewModels"] --> D["domain<br/>pure Kotlin use cases"]
+    DA["data<br/>Room · DataStore · FGS · Glance"] --> D
   end
-
-  subgraph Core["core:*"]
-    UI["core:designsystem · core:ui · core:navigation"]
-    Infra["core:database · core:datastore · core:analytics-impl · core:featureflags-impl"]
-    Model["core:model · core:common · core:analytics · core:featureflags · core:testing"]
+  subgraph C["core"]
+    UI["designsystem · ui · navigation"]
+    INF["database · datastore · analytics-impl · featureflags-impl"]
+    M["model · common · analytics · featureflags · testing"]
   end
-
-  App --> Pres
-  App --> Data
-  Pres --> UI
-  Pres --> Model
-  Dom --> Model
-  Data --> Infra
-  Data --> Model
+  APP --> P & DA
+  P --> UI
+  D --> M
+  DA --> INF
 ```
 
-### Engineering Guardrails (`AGENTS.md`)
-
-- **Strict Layer Boundaries:** `feature:x:domain` is pure JVM Kotlin; `presentation` calls use cases only (never repositories) and never depends on `data`.
-- **Type-Safe Domain Primitives:** Currency uses `core.model.Money` (`Long` micro-dollars, never `Double`); distance uses `core.model.Distance`.
-- **Fake-First Testing:** Tests use `testFixtures` fakes (`FakeAnalytics`, `FakeFeatureFlags`, `FakeClock`) rather than mocks.
-- **Startup & Runtime Budget:** Baseline Profiles, R8 full mode, `dagger.Lazy` for non-critical initialization, and no main-thread startup work.
-
----
-
-## Google Play Store Readiness
-
-All store publishing materials are prepared in [`store-listing/`](store-listing/):
-
-- **Listing Copy & Metadata:** [`store-listing/PLAY_STORE_LISTING.md`](store-listing/PLAY_STORE_LISTING.md) (app title, short & full descriptions, v1.0.0 release notes, Data Safety summary, and location policy disclosures)
-- **Play Store Icon (512 × 512):** [`store-listing/assets/play_store_icon_512x512.png`](store-listing/assets/play_store_icon_512x512.png)
-- **Feature Graphic (1024 × 500):** [`store-listing/assets/feature_graphic_1024x500.png`](store-listing/assets/feature_graphic_1024x500.png)
-- **8 Phone Screenshots (1080 × 1920):** [`store-listing/assets/screenshots/`](store-listing/assets/screenshots/)
-- **Adaptive Launcher Icon:** Configured in `app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml` with background, foreground, monochrome layer, and `mdpi`–`xxxhdpi` mipmaps.
+| Concern | Choice |
+|---|---|
+| UI | Jetpack Compose, Material 3, a custom design system, edge-to-edge, predictive back |
+| Presentation | MVVM + UDF: one `StateFlow<UiState>` per screen, ViewModels call use cases only |
+| DI / navigation | Hilt (including Service, Worker and Glance entry points) · Navigation 3 typed keys |
+| Data | Room (trips, track points, stays, analytics) · prepackaged GSA database · Preferences DataStore |
+| Background | `location` foreground service, WorkManager (started on demand), Activity Recognition |
+| Build | AGP 9.5, Kotlin 2.4, KSP2, version catalog, 8 convention plugins, configuration cache |
+| Quality | 279 unit tests · Macrobenchmark + Baseline Profile · forbidden-permission check · 18 ADRs |
 
 ---
 
-## Common Commands
-
+## Run it
 ```bash
-# Run JVM domain unit tests
-./gradlew :feature:trips:domain:test
-
-# Run Android presentation unit tests
-./gradlew :feature:trips:presentation:testDebugUnitTest
-
-# Install debug build on connected device/emulator
-./gradlew :app:installDebug
-
-# Run startup benchmark
-./gradlew :benchmark:connectedBenchmarkReleaseAndroidTest
+./gradlew :app:installDebug                                    # build and install
+adb shell am start -n com.aijones.mileage/.MainActivity --ez seed_demo true   # load demo data (debug builds only)
+./gradlew test testDebugUnitTest                               # all unit tests
+./gradlew :benchmark:connectedBenchmarkReleaseAndroidTest :benchmark:verifyStartupBudget  # startup gate
+./gradlew :app:verifyNoForbiddenPermissions                    # no background location, no INTERNET
 ```
+Requires JDK 17 and an Android SDK with API 37 (compile) and 36 (target).
 
----
+## Google Play readiness
+- Listing copy, data safety and location disclosures: [`store-listing/PLAY_STORE_LISTING.md`](store-listing/PLAY_STORE_LISTING.md)
+- 512² icon, 1024×500 feature graphic, 8 phone screenshots: [`store-listing/assets/`](store-listing/assets)
+- Researched publishing guide with official citations (developer account, 12-tester closed test, target API 36, foreground service and location declarations): [`docs/PLAY_PUBLISHING.md`](docs/PLAY_PUBLISHING.md)
 
-## Further Reading
-
-- [`AGENTS.md`](AGENTS.md) — Agent rules, layer constraints, and UI/accessibility standards
-- [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — Module graph, use cases, tech stack, and screen inventory
-- [`docs/ANALYTICS.md`](docs/ANALYTICS.md) — On-device analytics catalog, dashboards, and feature flags
-- [`docs/adr/`](docs/adr/) — Architecture Decision Records
+## Repository map
+```
+app/                    composition root: Application, MainActivity, navigation host
+benchmark/              Macrobenchmark startup tests + Baseline Profile generator
+build-logic/            Gradle convention plugins
+core/                   model, common, database, datastore, designsystem, ui, navigation,
+                        analytics(+impl), featureflags(+impl), testing
+feature/<name>/         domain · data · presentation for 7 features (+ widgets)
+tools/perdiem-import/   build-time GSA OpenAPI import → perdiem.db
+design/                 FigCraft source and renders for every screen
+docs/                   ARCHITECTURE.md, ANALYTICS.md, PLAY_PUBLISHING.md, adr/
+store-listing/          Play Store copy and graphics
+```

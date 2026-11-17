@@ -86,3 +86,19 @@ dependencies {
     baselineProfile(projects.benchmark)
     testImplementation(projects.core.testing)
 }
+
+val verifyPermissions = tasks.register("verifyNoForbiddenPermissions") {
+    group = "verification"
+    description = "Fails if the merged release manifest requests background location or internet access."
+    val manifest = layout.buildDirectory.file("intermediates/merged_manifests/release/processReleaseManifest/AndroidManifest.xml")
+    dependsOn("processReleaseManifest")
+    inputs.file(manifest)
+    doLast {
+        val text = manifest.get().asFile.readText()
+        val forbidden = listOf("android.permission.ACCESS_BACKGROUND_LOCATION", "android.permission.INTERNET")
+            .filter { text.contains("\"$it\"") }
+        check(forbidden.isEmpty()) { "Forbidden permissions in merged manifest: $forbidden" }
+    }
+}
+
+tasks.named("check") { dependsOn(verifyPermissions) }
