@@ -30,7 +30,7 @@ Ready-to-paste answers for every Play Console section, in the order you'll meet 
 | **Content rating** (IARC) | Category: *Utility, Productivity, Communication or Other*. Every content question: **No** (no violence, sexual content, profanity, drugs, gambling or user-generated content; no sharing of the user's location with other users; no digital purchases). Expected result: Everyone / PEGI 3. |
 | **Target audience** | **18 and over** only. Not designed for children. |
 | **News app** | No |
-| **Health apps** | No health features. Activity recognition is only used to suggest that a drive may be starting. ⚠ |
+| **Health apps** | Required because the bundle requests `ACTIVITY_RECOGNITION`. Feature: **Other**, "None. Activity recognition only detects that a drive may be starting, to suggest recording a mileage trip." Permission use: the opt-in Drive detection setting (off by default) subscribes only to the `IN_VEHICLE` enter transition and shows a suggestion notification; nothing is stored or sent, and no health or fitness data is collected. |
 | **Financial features** | "My app doesn't provide any financial features." It calculates reimbursement amounts but moves no money and provides no financial services. |
 | **Government apps** | No. It uses public IRS and GSA data but isn't affiliated with any government; the About screen and listing say "Data sources". |
 | **Data safety** | See below. |
