@@ -120,9 +120,12 @@ adb shell am start -n com.aijones.mileage/.MainActivity --ez seed_demo true   # 
 Requires JDK 17 and an Android SDK with API 37 (compile) and 36 (target).
 
 ## Google Play readiness
-- Listing copy, data safety and location disclosures: [`store-listing/PLAY_STORE_LISTING.md`](store-listing/PLAY_STORE_LISTING.md)
-- 512² icon, 1024×500 feature graphic, 8 phone screenshots: [`store-listing/assets/`](store-listing/assets)
-- Researched publishing guide with official citations (developer account, 12-tester closed test, target API 36, foreground service and location declarations): [`docs/PLAY_PUBLISHING.md`](docs/PLAY_PUBLISHING.md)
+- **Privacy policy:** [andreij6.github.io/mileage-per-diem/privacy](https://andreij6.github.io/mileage-per-diem/privacy/), served by GitHub Pages from `docs/privacy/`
+- **Play Console answer sheet** (data safety, content rating, target audience, foreground-service declaration): [`docs/PLAY_CONSOLE_ANSWERS.md`](docs/PLAY_CONSOLE_ANSWERS.md)
+- **Foreground-service demo video** for the location declaration: [`store-listing/video/fgs-location-demo.mp4`](store-listing/video/fgs-location-demo.mp4)
+- **Listing copy, icon, feature graphic, 8 screenshots of the real app:** [`store-listing/`](store-listing/PLAY_STORE_LISTING.md)
+- **Signed release builds:** upload key from a git-ignored `keystore.properties`; `bundleRelease` refuses to build without it ([`docs/RELEASING.md`](docs/RELEASING.md))
+- **Research:** a cited publishing guide covering the developer account, 12-tester closed test, target API 36, and foreground-service and location rules: [`docs/PLAY_PUBLISHING.md`](docs/PLAY_PUBLISHING.md)
 
 ## Repository map
 ```

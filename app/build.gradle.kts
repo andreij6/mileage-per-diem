@@ -16,7 +16,7 @@ android {
     namespace = "com.aijones.mileage"
     defaultConfig {
         applicationId = "com.aijones.mileage"
-        versionCode = 1
+        versionCode = 10000
         versionName = "1.0.0"
     }
     androidResources {

@@ -1,6 +1,6 @@
 # Mileage & Per Diem — Google Play Store Listing
 
-> Prepared from `design/mileage-per-diem.figcraft` (`design/renders/`) and `docs/ARCHITECTURE.md`.
+> Screenshots are captured from the running app (API 36 emulator) and framed with `design-tools/build_store.py`. Console answers: [`docs/PLAY_CONSOLE_ANSWERS.md`](../docs/PLAY_CONSOLE_ANSWERS.md).
 
 ---
 
@@ -11,7 +11,7 @@
 | **App Name** (max 30) | `Mileage & Per Diem` | 18 / 30 |
 | **Developer / Brand** | `AI.Jones` | — |
 | **Short Description** (max 80) | `Offline GPS mileage tracker, GSA per diem lookup & PDF/CSV expense reports.` | 75 / 80 |
-| **App Category** | `Business` (or `Finance`) | — |
+| **App Category** | `Business` | — |
 | **Tags** | `Mileage tracker`, `Expense tracker`, `Per diem`, `IRS mileage`, `Business travel` | — |
 | **Price** | `Free` (no ads, no subscriptions, no in-app purchases) | — |
 
@@ -26,7 +26,7 @@ Mileage & Per Diem is built for contractors, consultants, field teams, and busin
 
 KEY FEATURES
 
-• Automatic & One-Tap GPS Trip Recording
+• One-Tap GPS Trip Recording
   Start a trip from the home screen, home-screen widget, or Quick Settings tile. Watch live distance on a tactile odometer, elapsed time, speed, and estimated reimbursement as you drive — with adaptive battery mode and a transparent foreground notification.
 
 • Built-In Offline Route Canvas
@@ -93,28 +93,28 @@ All generated assets live in `store-listing/assets/`:
 
 ## 5. Screenshot Headlines & Captions
 
-1. **01 — Home & Odometer** (`design/renders/trips/home-light.png`)
+1. **01 — Home & Odometer** (app: Home)
    - Headline: `Track every business mile`
    - Subhead: `Monthly totals, live odometer & IRS rate snapshots`
-2. **02 — Live GPS Tracking** (`design/renders/tracking/live-light.png`)
+2. **02 — Live GPS Tracking** (app: Live trip)
    - Headline: `Live route, 100% offline`
    - Subhead: `In-app route canvas & battery-aware GPS recording`
-3. **03 — Trip Receipt** (`design/renders/tracking/receipt-light.png`)
+3. **03 — Trip Receipt** (app: Receipt)
    - Headline: `Instant itemized trip receipts`
    - Subhead: `Route preview, effective IRS rate & exact reimbursement`
-4. **04 — Swipe to Sort** (`design/renders/trips/review-light.png`)
+4. **04 — Swipe to Sort** (app: Review deck)
    - Headline: `Sort drives in seconds`
    - Subhead: `Swipe right for business, left for personal`
-5. **05 — GSA Per Diem** (`design/renders/per-diem/per_diem-light.png`)
+5. **05 — GSA Per Diem** (app: Per diem)
    - Headline: `Bundled GSA per diem rates`
    - Subhead: `Offline city lookup for lodging & daily M&IE`
-6. **06 — Reports Export** (`design/renders/reports/report-light.png`)
+6. **06 — Reports Export** (app: Report)
    - Headline: `Export PDF & CSV reports`
    - Subhead: `Generated on your phone — shared only by you`
-7. **07 — Monthly Insights** (`design/renders/insights/insights-light.png`)
-   - Headline: `See your year on the road`
-   - Subhead: `Mileage heatmaps, top stops & shareable stories`
-8. **08 — Widgets & Quick Settings** (`design/renders/widgets/widgets-light.png`)
+7. **07 — Monthly Insights** (app: Insights)
+   - Headline: `See your month on the road`
+   - Subhead: `Mileage heatmap, longest trips & top stops`
+8. **08 — Widgets & Quick Settings** (app: home-screen widgets)
    - Headline: `Start drives in one tap`
    - Subhead: `Home-screen widgets & Quick Settings tile`
 
@@ -126,3 +126,5 @@ All generated assets live in `store-listing/assets/`:
 - **Data shared with third parties:** None.
 - **Network / `INTERNET` permission:** Not declared. All storage (Room + DataStore) and reference data (IRS rates + bundled `perdiem.db`) live on-device.
 - **Location permission:** Foreground location only (`ACCESS_FINE_LOCATION` / `ACCESS_COARSE_LOCATION` + `FOREGROUND_SERVICE_LOCATION`). `ACCESS_BACKGROUND_LOCATION` is **not** requested; optional Activity Recognition drive detection only posts a local notification prompting the user to open the app and start recording.
+- **Privacy policy:** https://andreij6.github.io/mileage-per-diem/privacy/
+- **Foreground service demo video:** [`video/fgs-location-demo.mp4`](video/fgs-location-demo.mp4) (upload to YouTube as Unlisted for the FGS declaration)

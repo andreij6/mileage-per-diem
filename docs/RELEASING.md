@@ -9,7 +9,7 @@
 3. Enroll in **Play App Signing** when you create the app. Google holds the app signing key, and this key only signs your uploads.
 
 ## Every release
-1. Bump `versionCode` (must increase on every upload) and `versionName` in `app/build.gradle.kts`.
+1. Bump `versionName` (semantic: `1.0.1` for fixes, `1.1.0` for features) and `versionCode` in `app/build.gradle.kts`. `versionCode` = `major * 10000 + minor * 100 + patch` (1.2.3 → 10203), so it always increases and can be decoded.
 2. `./gradlew check :app:verifyNoForbiddenPermissions` runs the tests and the permission guard.
 3. `./gradlew :benchmark:connectedBenchmarkReleaseAndroidTest :benchmark:verifyStartupBudget` checks startup is still within budget (needs a device or emulator).
 4. `./gradlew :app:bundleRelease` writes `app/build/outputs/bundle/release/app-release.aab`. It refuses to run without an upload key, so a debug-signed bundle can't reach Play.

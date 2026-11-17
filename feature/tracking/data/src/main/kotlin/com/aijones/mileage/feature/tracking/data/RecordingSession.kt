@@ -54,7 +54,7 @@ class RecordingSession @Inject constructor(
 
         var previous: Fix? = null
         fun onFix(policy: RecordingPolicy, incoming: Fix) {
-            val fix = incoming.speedMps?.let { incoming } ?: incoming.copy(speedMps = previous?.let { derivedSpeed(it, incoming) })
+            val fix = incoming.speedMps?.takeIf { it > 0f }?.let { incoming } ?: incoming.copy(speedMps = previous?.let { derivedSpeed(it, incoming) } ?: incoming.speedMps)
             previous = incoming
             filter.accept(fix)
             buffer += fix.toTrackPoint()
