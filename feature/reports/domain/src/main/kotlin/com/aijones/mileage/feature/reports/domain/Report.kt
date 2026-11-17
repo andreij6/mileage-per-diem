@@ -16,7 +16,6 @@ data class Report(
     val from: LocalDate,
     val to: LocalDate,
     val employee: String,
-    val employeeId: String = "",
     val company: String,
     val trips: List<Trip>,
     val stays: List<Stay>,
@@ -26,6 +25,7 @@ data class Report(
     val distance: Distance,
     val generatedAt: Instant,
     val rateNote: String,
+    val employeeId: String = "",
 )
 
 data class ExportedFile(val path: String, val mimeType: String, val fileName: String)

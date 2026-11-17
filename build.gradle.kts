@@ -9,14 +9,4 @@ plugins {
     alias(libs.plugins.hilt) apply false
     alias(libs.plugins.room) apply false
     alias(libs.plugins.baselineprofile) apply false
-    kotlin("jvm")
-}
-dependencies {
-    implementation(kotlin("stdlib-jdk8"))
-}
-repositories {
-    mavenCentral()
-}
-kotlin {
-    jvmToolchain(8)
 }
