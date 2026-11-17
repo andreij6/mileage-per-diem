@@ -121,6 +121,7 @@ tasks.named("check") { dependsOn(verifyPermissions) }
 
 val hasUploadKey = uploadKey != null
 tasks.matching { it.name == "bundleRelease" }.configureEach {
+    val hasUploadKey = hasUploadKey
     doFirst {
         check(hasUploadKey) { "No upload key: create keystore.properties (see docs/RELEASING.md). Refusing to build a debug-signed bundle for Play." }
     }
