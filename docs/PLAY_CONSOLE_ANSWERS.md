@@ -16,8 +16,8 @@ Ready-to-paste answers for every Play Console section, in the order you'll meet 
 | Field | Answer |
 |---|---|
 | Category | **Business** (not Finance, so the app isn't mistaken for a financial-services app) |
-| Tags | Mileage tracker, Expense tracker, Business travel |
-| Contact email | your public developer email |
+| Tags | Business, Productivity, Travel & local, Auto & vehicles (Play has no mileage or expense tag; Finance is left out on purpose) |
+| Contact email | the developer account email |
 | Website | `https://andreij6.github.io/mileage-per-diem/` |
 | Countries | **United States only**. IRS rates and GSA per diems are U.S. rules. |
 
