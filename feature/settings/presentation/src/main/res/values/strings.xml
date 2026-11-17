@@ -74,7 +74,7 @@
     <string name="about_privacy_3">Location is used only while a trip records</string>
     <string name="about_section_info">Info</string>
     <string name="about_privacy_policy">Privacy policy</string>
-    <string name="about_privacy_policy_url" translatable="false">https://aijones.github.io/mileage-per-diem/privacy</string>
+    <string name="about_privacy_policy_url" translatable="false">https://andreij6.github.io/mileage-per-diem/privacy/</string>
     <string name="about_open_externally">Opens in your browser</string>
     <string name="about_data_sources">Data sources</string>
     <string name="about_data_sources_value">IRS · GSA FY2027</string>

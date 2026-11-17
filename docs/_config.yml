@@ -1,0 +1,5 @@
+title: Mileage & Per Diem
+description: Offline mileage and GSA per diem tracker for Android, by AI.Jones.
+theme: jekyll-theme-minimal
+exclude:
+  - adr
