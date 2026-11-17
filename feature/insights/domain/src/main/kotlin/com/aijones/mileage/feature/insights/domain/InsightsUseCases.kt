@@ -23,7 +23,7 @@ import java.util.Locale
 import javax.inject.Inject
 import kotlin.math.roundToInt
 
-private fun List<Trip>.businessFinished() = filter { it.isFinished && it.category == TripCategory.BUSINESS }
+private fun List<Trip>.businessFinished() = filter { it.isReimbursable }
 
 private fun Iterable<Trip>.totalDistance() = fold(Distance.ZERO) { acc, t -> acc + t.distance }
 

@@ -35,7 +35,7 @@ class ObserveReportUseCase @Inject constructor(
         flow { emit(rates.irsRates()) },
     ) { allTrips, stayList, s, custom, irs ->
         val trips = allTrips
-            .filter { it.isFinished && (!businessOnly || it.category == TripCategory.BUSINESS) }
+            .filter { it.isFinished && !it.needsReview && (!businessOnly || it.category == TripCategory.BUSINESS) }
             .sortedBy { it.startedAt }
         val mileage = trips.map { it.reimbursement }.sum()
         val perDiem = stayList.map { it.total }.sum()

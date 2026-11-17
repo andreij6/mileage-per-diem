@@ -50,10 +50,11 @@ class TripUseCasesTest {
     }
 
     @Test
-    fun monthSummaryCountsFinishedBusinessTripsOnly() = runTest {
+    fun monthSummaryCountsFinishedReviewedBusinessTripsOnly() = runTest {
         val repo = FakeTripRepository(
             listOf(
                 trip(1, "2026-11-03T14:00:00Z", 18.4),
+                trip(6, "2026-11-06T14:00:00Z", 24.8).copy(needsReview = true),
                 trip(2, "2026-11-04T14:00:00Z", 10.0),
                 trip(3, "2026-11-05T14:00:00Z", 50.0, category = TripCategory.PERSONAL),
                 trip(4, "2026-11-16T14:00:00Z", 5.0, status = TripStatus.RECORDING),

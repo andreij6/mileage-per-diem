@@ -9,7 +9,7 @@ const val PACKAGE = "com.aijones.mileage"
 
 fun MacrobenchmarkScope.seedDemoData() {
     device.executeShellCommand("am start -W -n $PACKAGE/.MainActivity --ez seed_demo true")
-    device.wait(Until.hasObject(By.text("Recent trips")), 10_000)
+    device.wait(Until.hasObject(By.textContains("need a purpose")), 60_000)
     killProcess()
 }
 

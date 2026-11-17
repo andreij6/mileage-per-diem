@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="perdiem_title">Per diem</string>
+    <string name="perdiem_subtitle">GSA rates · FY%1$d · bundled, works offline</string>
+    <string name="perdiem_search_city">Search per diem city. Selected: %1$s</string>
+    <string name="perdiem_standard_label">Standard CONUS rate</string>
+    <string name="perdiem_lodging">Lodging</string>
+    <string name="perdiem_lodging_sub">per night · %1$s</string>
+    <string name="perdiem_mie">Meals &amp; incidentals</string>
+    <string name="perdiem_mie_sub">per day</string>
+    <string name="perdiem_lodging_by_month">Lodging by month</string>
+    <string name="perdiem_fy">FY%1$d</string>
+    <string name="perdiem_lodging_chart_summary">Lodging by month, FY%1$d, %2$s</string>
+    <string name="perdiem_breakfast">Breakfast</string>
+    <string name="perdiem_lunch">Lunch</string>
+    <string name="perdiem_dinner">Dinner</string>
+    <string name="perdiem_incidentals">Incidentals</string>
+    <string name="perdiem_trip_estimate">3-day trip estimate</string>
+    <string name="perdiem_add_stay">Add stay</string>
+
+    <string name="perdiem_search_hint">Search a city or county</string>
+    <string name="perdiem_search_back">Back</string>
+    <string name="perdiem_search_clear">Clear search</string>
+    <string name="perdiem_results">Results · FY%1$d</string>
+    <string name="perdiem_recent">Recent</string>
+    <string name="perdiem_standard_area">Standard rate area</string>
+    <string name="perdiem_mie_per_day">M&amp;IE / day</string>
+    <string name="perdiem_no_results">No GSA destination matches. Places not listed use the standard rate.</string>
+    <string name="perdiem_standard_note">Places not listed use the standard CONUS rate: %1$s lodging, %2$s M&amp;IE.</string>
+
+    <string name="stay_title">Add stay · %1$s</string>
+    <string name="stay_check_in">Check-in</string>
+    <string name="stay_check_out">Check-out</string>
+    <string name="stay_claim_lodging">Claim lodging</string>
+    <string name="stay_lodging_off">Off: the hotel is on a company card</string>
+    <string name="stay_lodging_on">On: lodging at the GSA nightly rate</string>
+    <string name="stay_add_to_report">Add to %1$s report</string>
+    <string name="stay_date_ok">OK</string>
+    <string name="stay_date_cancel">Cancel</string>
+    <plurals name="stay_travel_days">
+        <item quantity="one">%1$d travel day × %2$s (75%%)</item>
+        <item quantity="other">%1$d travel days × %2$s (75%%)</item>
+    </plurals>
+    <plurals name="stay_full_days">
+        <item quantity="one">%1$d full day × %2$s</item>
+        <item quantity="other">%1$d full days × %2$s</item>
+    </plurals>
+    <plurals name="stay_nights">
+        <item quantity="one">%1$d night lodging</item>
+        <item quantity="other">%1$d nights lodging</item>
+    </plurals>
+    <plurals name="stay_total_mie">
+        <item quantity="one">%1$d day · M&amp;IE</item>
+        <item quantity="other">%1$d days · M&amp;IE</item>
+    </plurals>
+    <plurals name="stay_total_mie_lodging">
+        <item quantity="one">%1$d day · M&amp;IE + lodging</item>
+        <item quantity="other">%1$d days · M&amp;IE + lodging</item>
+    </plurals>
+</resources>

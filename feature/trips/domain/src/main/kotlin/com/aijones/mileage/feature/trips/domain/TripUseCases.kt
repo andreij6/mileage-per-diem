@@ -27,7 +27,7 @@ class ObserveMonthSummaryUseCase @Inject constructor(
 ) {
     operator fun invoke(month: YearMonth): Flow<MonthSummary> =
         combine(observeTrips(month.atDay(1), month.atEndOfMonth()), observeCurrentRate()) { trips, rate ->
-            val business = trips.filter { it.isFinished && it.category == TripCategory.BUSINESS }
+            val business = trips.filter { it.isReimbursable }
             MonthSummary(
                 month = month,
                 reimbursement = business.map { it.reimbursement }.sum(),

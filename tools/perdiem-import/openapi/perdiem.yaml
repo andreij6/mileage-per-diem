@@ -1,0 +1,97 @@
+openapi: 3.0.0
+info:
+  title: GSA Per Diem API (subset used by perdiem-import)
+  description: >-
+    Derived from GSA's published description at https://open.gsa.gov/api/perdiem/v2/openapi.yaml (same server and
+    API key scheme). GSA's file declares no response schemas and omits the M&IE endpoint, so this subset adds both,
+    modelled on the live v2 responses.
+  version: 2.0.0
+servers:
+  - url: https://api.gsa.gov/travel/perdiem
+security:
+  - ApiKeyAuth: []
+paths:
+  /v2/rates/conus/lodging/{year}:
+    get:
+      tags: [rates]
+      operationId: conusLodging
+      summary: Lodging rates for the Continental US by year
+      parameters:
+        - name: year
+          in: path
+          required: true
+          description: The fiscal year to filter by
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Every non-standard CONUS destination plus one standard-rate row per state.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LodgingRate"
+        "403":
+          description: API key is not correct or was not provided.
+  /v2/rates/conus/mie/{year}:
+    get:
+      tags: [rates]
+      operationId: conusMie
+      summary: M&IE breakdown tiers for the Continental US by year
+      parameters:
+        - name: year
+          in: path
+          required: true
+          description: The fiscal year to filter by
+          schema:
+            type: string
+      responses:
+        "200":
+          description: One row per M&IE tier.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MieRate"
+        "403":
+          description: API key is not correct or was not provided.
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+  schemas:
+    LodgingRate:
+      type: object
+      required: [City, State, DID, Meals, Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec]
+      properties:
+        City: { type: string }
+        State: { type: string }
+        County: { type: string, nullable: true }
+        DID: { type: string }
+        Meals: { type: string }
+        Jan: { type: string }
+        Feb: { type: string }
+        Mar: { type: string }
+        Apr: { type: string }
+        May: { type: string }
+        Jun: { type: string }
+        Jul: { type: string }
+        Aug: { type: string }
+        Sep: { type: string }
+        Oct: { type: string }
+        Nov: { type: string }
+        Dec: { type: string }
+    MieRate:
+      type: object
+      required: [total, breakfast, lunch, dinner, incidental, FirstLastDay]
+      properties:
+        total: { type: number, format: double }
+        breakfast: { type: number, format: double }
+        lunch: { type: number, format: double }
+        dinner: { type: number, format: double }
+        incidental: { type: number, format: double }
+        FirstLastDay: { type: number, format: double }

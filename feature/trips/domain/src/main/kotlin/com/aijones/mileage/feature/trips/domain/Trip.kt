@@ -42,6 +42,7 @@ data class Trip(
     val isActive: Boolean get() = status == TripStatus.RECORDING || status == TripStatus.PAUSED
 
     val isFinished: Boolean get() = status == TripStatus.DONE || status == TripStatus.MANUAL
+    val isReimbursable: Boolean get() = isFinished && !needsReview && category == TripCategory.BUSINESS
 }
 
 data class TrackPoint(val t: Instant, val point: GeoPoint, val accuracyM: Float, val speedMps: Float? = null)

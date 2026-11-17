@@ -58,8 +58,8 @@ class DemoSeeder @Inject constructor(
             )
             trips.appendTrackPoints(id, track.mapIndexed { i, (p, t) -> TrackPoint(Instant.ofEpochMilli(t), p, 5f, speedFor(i)) })
         }
-        stays.add(stay(2, "Boston, MA", "2026-11-04", "2026-11-07", 32_200))
-        stays.add(stay(1, "New York City, NY", "2026-11-18", "2026-11-25", 69_000))
+        stays.add(stay(114, "Boston / Cambridge, MA", "2026-11-04", "2026-11-07", 32_200))
+        stays.add(stay(202, "New York City, NY", "2026-11-18", "2026-11-25", 69_000))
     }
 
     private fun speedFor(i: Int) = listOf(0f, 4f, 10f, 14f, 12f, 5f, 2f, 8f, 15f, 18f, 17f, 16f, 10f, 4f, 8f, 13f, 15f, 12f, 6f, 1f)[i % 20]

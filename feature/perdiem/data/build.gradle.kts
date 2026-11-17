@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.aijones.feature.data)
+    id("aijones.room")
 }
 
 dependencies {

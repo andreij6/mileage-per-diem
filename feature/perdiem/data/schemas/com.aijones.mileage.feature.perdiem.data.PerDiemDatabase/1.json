@@ -1,0 +1,196 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "9bf369e3bca680d117f07e6abd47d4a7",
+    "entities": [
+      {
+        "tableName": "location",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `fy` INTEGER NOT NULL, `city` TEXT NOT NULL, `state` TEXT NOT NULL, `county` TEXT, `isStandard` INTEGER NOT NULL, `mieTotalCents` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fy",
+            "columnName": "fy",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "city",
+            "columnName": "city",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "state",
+            "columnName": "state",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "county",
+            "columnName": "county",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "isStandard",
+            "columnName": "isStandard",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "mieTotalCents",
+            "columnName": "mieTotalCents",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        }
+      },
+      {
+        "tableName": "lodging",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`locationId` INTEGER NOT NULL, `month` INTEGER NOT NULL, `cents` INTEGER NOT NULL, PRIMARY KEY(`locationId`, `month`))",
+        "fields": [
+          {
+            "fieldPath": "locationId",
+            "columnName": "locationId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "month",
+            "columnName": "month",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cents",
+            "columnName": "cents",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "locationId",
+            "month"
+          ]
+        }
+      },
+      {
+        "tableName": "mie",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`fy` INTEGER NOT NULL, `totalCents` INTEGER NOT NULL, `breakfastCents` INTEGER NOT NULL, `lunchCents` INTEGER NOT NULL, `dinnerCents` INTEGER NOT NULL, `incidentalsCents` INTEGER NOT NULL, `firstLastCents` INTEGER NOT NULL, PRIMARY KEY(`fy`, `totalCents`))",
+        "fields": [
+          {
+            "fieldPath": "fy",
+            "columnName": "fy",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "totalCents",
+            "columnName": "totalCents",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "breakfastCents",
+            "columnName": "breakfastCents",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lunchCents",
+            "columnName": "lunchCents",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dinnerCents",
+            "columnName": "dinnerCents",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "incidentalsCents",
+            "columnName": "incidentalsCents",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "firstLastCents",
+            "columnName": "firstLastCents",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "fy",
+            "totalCents"
+          ]
+        }
+      },
+      {
+        "tableName": "location_fts",
+        "createSql": "CREATE VIRTUAL TABLE IF NOT EXISTS `${TABLE_NAME}` USING FTS4(`city` TEXT NOT NULL, `state` TEXT NOT NULL, `county` TEXT, content=`location`)",
+        "fields": [
+          {
+            "fieldPath": "city",
+            "columnName": "city",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "state",
+            "columnName": "state",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "county",
+            "columnName": "county",
+            "affinity": "TEXT"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": []
+        },
+        "ftsVersion": "FTS4",
+        "ftsOptions": {
+          "tokenizer": "simple",
+          "tokenizerArgs": [],
+          "contentTable": "location",
+          "languageIdColumnName": "",
+          "matchInfo": "FTS4",
+          "notIndexedColumns": [],
+          "prefixSizes": [],
+          "preferredOrder": "ASC"
+        },
+        "contentSyncTriggers": [
+          "CREATE TRIGGER IF NOT EXISTS room_fts_content_sync_location_fts_BEFORE_UPDATE BEFORE UPDATE ON `location` BEGIN DELETE FROM `location_fts` WHERE `docid`=OLD.`rowid`; END",
+          "CREATE TRIGGER IF NOT EXISTS room_fts_content_sync_location_fts_BEFORE_DELETE BEFORE DELETE ON `location` BEGIN DELETE FROM `location_fts` WHERE `docid`=OLD.`rowid`; END",
+          "CREATE TRIGGER IF NOT EXISTS room_fts_content_sync_location_fts_AFTER_UPDATE AFTER UPDATE ON `location` BEGIN INSERT INTO `location_fts`(`docid`, `city`, `state`, `county`) VALUES (NEW.`rowid`, NEW.`city`, NEW.`state`, NEW.`county`); END",
+          "CREATE TRIGGER IF NOT EXISTS room_fts_content_sync_location_fts_AFTER_INSERT AFTER INSERT ON `location` BEGIN INSERT INTO `location_fts`(`docid`, `city`, `state`, `county`) VALUES (NEW.`rowid`, NEW.`city`, NEW.`state`, NEW.`county`); END"
+        ]
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '9bf369e3bca680d117f07e6abd47d4a7')"
+    ]
+  }
+}

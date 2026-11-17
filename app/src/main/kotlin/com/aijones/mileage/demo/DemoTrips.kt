@@ -13,8 +13,8 @@ import kotlin.random.Random
 data class DemoPlace(val label: String, val point: GeoPoint)
 
 object Places {
-    val office = DemoPlace("Brooklyn office", GeoPoint(40.7033, -73.9881))
-    val acme = DemoPlace("Acme HQ, Midtown", GeoPoint(40.7536, -73.9832))
+    val office = DemoPlace("Office", GeoPoint(40.7033, -73.9881))
+    val acme = DemoPlace("Acme HQ", GeoPoint(40.7536, -73.9832))
     val jfk = DemoPlace("JFK Airport", GeoPoint(40.6413, -73.7781))
     val home = DemoPlace("Home", GeoPoint(40.6782, -73.9442))
     val newark = DemoPlace("Newark Supply", GeoPoint(40.7357, -74.1724))
@@ -82,10 +82,10 @@ object DemoTrips {
             val diff = Math.round((target - trips.sumOf { it.miles }) * 10) / 10.0
             return trips.dropLast(1) + trips.last().let { it.copy(miles = Math.round((it.miles + diff) * 10) / 10.0) }
         }
-        return spread(1..6, h1Target, 220) + spread(7..10, h2Target, 160)
+        return spread(1..6, h1Target, 110) + spread(7..10, h2Target, 70)
     }
 
-    fun track(trip: DemoTrip, points: Int = 40): List<Pair<GeoPoint, Long>> {
+    fun track(trip: DemoTrip, points: Int = 24): List<Pair<GeoPoint, Long>> {
         val rnd = Random(trip.start.toEpochSecond())
         val bend = (rnd.nextDouble() - 0.5) * 0.02
         val startMs = trip.start.toInstant().toEpochMilli()

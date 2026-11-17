@@ -78,7 +78,7 @@ class TripListViewModel @Inject constructor(
             query = f.query,
             count = shown.size,
             distance = shown.fold(Distance.ZERO) { acc, t -> acc + t.distance }.formatMiles(),
-            total = shown.map { it.reimbursement }.sum().formatUsd(),
+            total = shown.filter { it.isReimbursable }.map { it.reimbursement }.sum().formatUsd(),
             groups = shown.groupBy { it.localDate(clock) }.map { (date, dayTrips) ->
                 TripGroupUi(dayLabel(date, clock, weekdayDate), dayTrips.map { it.toRowUi(clock) })
             },

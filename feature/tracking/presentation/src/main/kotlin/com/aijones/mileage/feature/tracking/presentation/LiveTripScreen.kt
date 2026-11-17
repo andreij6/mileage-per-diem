@@ -94,7 +94,7 @@ fun LiveTripRoute(key: LiveTripRoute, navigator: Navigator) {
     }
     val notifications = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { vm.onNotificationPermission(it, asked = true) }
     val settings = rememberLauncherForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) {
-        vm.onLocationSettings(it.resultCode == Activity.RESULT_OK)
+        vm.onLocationSettings(it.resultCode == Activity.RESULT_OK || context.deviceLocationOn())
     }
     var launched by rememberSaveable { mutableStateOf<PermissionStep?>(null) }
     LaunchedEffect(state.permissionStep) {
@@ -135,6 +135,10 @@ private suspend fun checkLocationSettings(
     launcher: ManagedActivityResultLauncher<IntentSenderRequest, ActivityResult>,
     onResult: (Boolean) -> Unit,
 ) {
+    if (context.deviceLocationOn()) {
+        onResult(true)
+        return
+    }
     val request = LocationSettingsRequest.Builder()
         .addLocationRequest(LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 2_000).build())
         .build()
@@ -146,10 +150,12 @@ private suspend fun checkLocationSettings(
     } catch (e: CancellationException) {
         throw e
     } catch (e: Exception) {
-        val manager = context.getSystemService(LocationManager::class.java)
-        onResult(manager != null && LocationManagerCompat.isLocationEnabled(manager))
+        onResult(context.deviceLocationOn())
     }
 }
+
+private fun Context.deviceLocationOn(): Boolean =
+    getSystemService(LocationManager::class.java)?.let(LocationManagerCompat::isLocationEnabled) == true
 
 @Composable
 fun LiveTripScreen(state: LiveTripUiState, onTogglePause: () -> Unit, onEnd: () -> Unit, modifier: Modifier = Modifier) {

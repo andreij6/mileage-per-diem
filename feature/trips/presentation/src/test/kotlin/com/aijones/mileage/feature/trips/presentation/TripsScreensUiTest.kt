@@ -7,6 +7,8 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.onAllNodesWithText
+import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performCustomAccessibilityActionWithLabel
 import com.aijones.mileage.core.analytics.AnalyticsEvent
@@ -67,8 +69,8 @@ class TripsScreensUiTest {
         )
         compose.setContent { MpdTheme(darkTheme = false) { HomeRoute(navigator, vm) } }
 
-        compose.onNodeWithText("$32.83").assertIsDisplayed()
-        compose.onNodeWithContentDescription("43.2 miles").assertIsDisplayed()
+        compose.onAllNodesWithText("$13.98").assertCountEquals(2)
+        compose.onNodeWithContentDescription("18.4 miles").assertIsDisplayed()
         compose.onNodeWithText("1 trip needs a purpose").assertIsDisplayed()
         compose.onNodeWithText("Today · 9:12 – 9:41 · 18.4 mi", useUnmergedTree = true).assertIsDisplayed()
 

@@ -50,9 +50,9 @@ class HomeViewModelTest {
                 HomeUiState(
                     loading = false,
                     month = "November 2026",
-                    reimbursement = "$45.14",
-                    odometerTenths = 594,
-                    tripCount = 3,
+                    reimbursement = "$26.30",
+                    odometerTenths = 346,
+                    tripCount = 2,
                     rate = "76¢",
                     needsReview = 1,
                     recent = listOf(
