@@ -1,9 +1,15 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.aijones.android.application)
     alias(libs.plugins.aijones.android.compose)
     alias(libs.plugins.aijones.hilt)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.baselineprofile)
+}
+
+val uploadKey = rootProject.file("keystore.properties").takeIf { it.exists() }?.let { f ->
+    Properties().apply { f.inputStream().use { load(it) } }
 }
 
 android {
@@ -16,12 +22,22 @@ android {
     androidResources {
         localeFilters += "en"
     }
+    signingConfigs {
+        if (uploadKey != null) {
+            create("upload") {
+                storeFile = file(uploadKey.getProperty("storeFile"))
+                storePassword = uploadKey.getProperty("storePassword")
+                keyAlias = uploadKey.getProperty("keyAlias")
+                keyPassword = uploadKey.getProperty("keyPassword")
+            }
+        }
+    }
     buildTypes {
         release {
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-            signingConfig = signingConfigs.getByName("debug")
+            signingConfig = signingConfigs.findByName("upload") ?: signingConfigs.getByName("debug")
         }
     }
     dependenciesInfo {
@@ -102,3 +118,10 @@ val verifyPermissions = tasks.register("verifyNoForbiddenPermissions") {
 }
 
 tasks.named("check") { dependsOn(verifyPermissions) }
+
+val hasUploadKey = uploadKey != null
+tasks.matching { it.name == "bundleRelease" }.configureEach {
+    doFirst {
+        check(hasUploadKey) { "No upload key: create keystore.properties (see docs/RELEASING.md). Refusing to build a debug-signed bundle for Play." }
+    }
+}
