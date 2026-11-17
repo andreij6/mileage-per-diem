@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="reports_title">Report</string>
+    <string name="reports_business_only">Business only</string>
+    <string name="reports_all_trips">All trips</string>
+    <string name="reports_range_action">Change report dates</string>
+    <string name="reports_total_reimbursable">Total reimbursable</string>
+    <string name="reports_mileage">Mileage</string>
+    <string name="reports_per_diem">Per diem</string>
+    <string name="reports_included">Included</string>
+    <string name="reports_mie_only">M&amp;IE only</string>
+    <string name="reports_with_lodging">with lodging</string>
+    <string name="reports_pdf">PDF</string>
+    <string name="reports_csv">CSV</string>
+    <string name="reports_exporting">Creating %1$s</string>
+    <string name="reports_privacy_note">Generated on this phone. Shared only through the Android share sheet.</string>
+    <string name="reports_export_failed">Couldn\'t create the report. Try again.</string>
+    <string name="reports_share_title">Share report</string>
+    <string name="reports_pick_dates">Report dates</string>
+    <string name="reports_save">Save</string>
+    <string name="reports_cancel">Cancel</string>
+    <string name="reports_dot_join">%1$s · %2$s</string>
+    <plurals name="reports_trips">
+        <item quantity="one">%1$d trip</item>
+        <item quantity="other">%1$d trips</item>
+    </plurals>
+    <plurals name="reports_days">
+        <item quantity="one">%1$d day</item>
+        <item quantity="other">%1$d days</item>
+    </plurals>
+    <plurals name="reports_cities">
+        <item quantity="one">%1$d city</item>
+        <item quantity="other">%1$d cities</item>
+    </plurals>
+</resources>
