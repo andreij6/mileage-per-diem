@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="insights_title">%1$s insights</string>
+    <string name="insights_miles_by_day">Miles by day</string>
+    <string name="insights_less">Less</string>
+    <string name="insights_more">More</string>
+    <plurals name="insights_day_description">
+        <item quantity="one">%1$s, %2$s mile</item>
+        <item quantity="other">%1$s, %2$s miles</item>
+    </plurals>
+    <string name="insights_day_today">today</string>
+    <string name="insights_day_future">upcoming</string>
+    <string name="insights_longest">Longest</string>
+    <string name="insights_busiest">Busiest</string>
+    <string name="insights_top_stop">Top stop</string>
+    <string name="insights_top_stop_value">%1$d×</string>
+    <string name="insights_none">—</string>
+    <string name="insights_no_trips">No trips yet</string>
+    <string name="insights_by_weekday">By weekday</string>
+    <string name="insights_weekday_description">%1$s, %2$s</string>
+    <string name="insights_year_title">Your %1$d on the road</string>
+    <string name="insights_year_subtitle">%1$s miles · 3 stories · ready to share</string>
+    <string name="insights_year_open">Play your year in review</string>
+
+    <string name="yir_header">%1$d on the road</string>
+    <string name="yir_close">Close</string>
+    <string name="yir_next">Next story</string>
+    <string name="yir_previous">Previous story</string>
+    <string name="yir_progress">Story %1$d of %2$d</string>
+    <string name="yir_you_drove">You drove</string>
+    <string name="yir_business_miles">business miles in %1$d</string>
+    <string name="yir_earth">That\'s %1$d%% of the way around the Earth.</string>
+    <string name="yir_where_most">Where you went most</string>
+    <string name="yir_no_places">No places yet. Your top stops will show up here.</string>
+    <string name="yir_routes_description">Routes from %1$s</string>
+    <string name="yir_back_in_pocket">Back in your pocket</string>
+    <string name="yir_period">%1$s · %2$s mi × %3$s</string>
+    <string name="yir_share">Share this card</string>
+    <string name="yir_share_chooser">Share your year</string>
+    <string name="yir_share_note">Made on your phone as an image. Nothing is uploaded.</string>
+    <plurals name="yir_trips">
+        <item quantity="one">%1$d trip</item>
+        <item quantity="other">%1$d trips</item>
+    </plurals>
+    <plurals name="yir_per_diem">
+        <item quantity="one">Plus %1$s in per diems in %2$d city.</item>
+        <item quantity="other">Plus %1$s in per diems across %2$d cities.</item>
+    </plurals>
+</resources>

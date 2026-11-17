@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="widget_month_label">Mileage this month</string>
+    <string name="widget_month_description">This month\'s reimbursement and miles, with a Start trip button.</string>
+    <string name="widget_per_diem_label">Today\'s per diem</string>
+    <string name="widget_per_diem_description">Meals and lodging rates for the city you\'re working in.</string>
+    <string name="widget_recording_label">Trip recording</string>
+    <string name="widget_recording_description">Distance and time of the trip you\'re recording, with a Stop button.</string>
+
+    <string name="widget_mi">mi</string>
+    <string name="widget_odometer_description">%1$s miles</string>
+    <string name="widget_start_trip">Start trip</string>
+    <string name="widget_stop_trip">Stop trip</string>
+    <string name="widget_per_diem_title">Today\'s per diem</string>
+    <string name="widget_per_diem_place">%1$s · M&amp;IE</string>
+    <string name="widget_lodging">Lodging %1$s / night</string>
+    <string name="widget_per_diem_empty">Search a city in Per diem to see today\'s rates.</string>
+    <string name="widget_recording">Recording · %1$s</string>
+    <string name="widget_paused">Paused · %1$s</string>
+    <string name="widget_recording_detail">%1$s · %2$s so far</string>
+    <string name="widget_not_recording">Not recording</string>
+
+    <string name="widget_preview_month_amount" translatable="false">$642.20</string>
+    <string name="widget_preview_per_diem_amount" translatable="false">$92</string>
+
+    <string name="tile_label">Start trip</string>
+    <string name="tile_subtitle">Mileage</string>
+    <string name="tile_recording">Recording</string>
+    <string name="tile_idle">Not recording</string>
+</resources>

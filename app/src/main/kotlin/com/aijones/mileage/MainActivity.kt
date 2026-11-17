@@ -11,6 +11,9 @@ import androidx.compose.runtime.getValue
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.aijones.mileage.core.analytics.Analytics
+import com.aijones.mileage.core.analytics.AnalyticsEvent
+import com.aijones.mileage.core.navigation.Deeplinks
+import com.aijones.mileage.feature.widgets.presentation.WidgetUpdater
 import com.aijones.mileage.demo.DemoSeeder
 import com.aijones.mileage.feature.tracking.data.TrackingInitializer
 import androidx.lifecycle.lifecycleScope
@@ -31,6 +34,7 @@ class MainActivity : ComponentActivity() {
     @Inject lateinit var analytics: Analytics
     @Inject lateinit var demoSeeder: dagger.Lazy<DemoSeeder>
     @Inject lateinit var trackingInitializer: dagger.Lazy<TrackingInitializer>
+    @Inject lateinit var widgetUpdater: dagger.Lazy<WidgetUpdater>
 
     private val viewModel: AppViewModel by viewModels()
     private val intents = MutableStateFlow<Intent?>(null)
@@ -44,6 +48,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         splash.setKeepOnScreenCondition { viewModel.state.value is AppUiState.Loading }
         intents.value = intent
+        if (savedInstanceState == null) trackWidgetStart(intent)
         if (intent.getBooleanExtra("seed_demo", false) && resources.getBoolean(R.bool.allow_demo_seed)) {
             lifecycleScope.launch(Dispatchers.IO) { demoSeeder.get().seedIfEmpty() }
         }
@@ -63,11 +68,21 @@ class MainActivity : ComponentActivity() {
 
     override fun onPostResume() {
         super.onPostResume()
-        window.decorView.post { trackingInitializer.get().start() }
+        window.decorView.post {
+            trackingInitializer.get().start()
+            widgetUpdater.get().start()
+        }
     }
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
+        trackWidgetStart(intent)
         intents.value = intent
+    }
+
+    private fun trackWidgetStart(intent: Intent?) {
+        if (intent?.action == Deeplinks.ACTION_START_TRIP && intent.getStringExtra(Deeplinks.EXTRA_SOURCE) == "widget") {
+            analytics.track(AnalyticsEvent.WidgetAction(intent.getStringExtra("widget") ?: "month", "start_trip"))
+        }
     }
 }

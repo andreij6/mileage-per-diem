@@ -7,6 +7,8 @@ dependencies {
     implementation(projects.core.analytics)
     implementation(projects.core.featureflags)
     testImplementation(testFixtures(projects.feature.insights.domain))
+    testImplementation(testFixtures(projects.feature.trips.domain))
+    testImplementation(testFixtures(projects.feature.perdiem.domain))
     testImplementation(testFixtures(projects.core.analytics))
     testImplementation(testFixtures(projects.core.featureflags))
 }

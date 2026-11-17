@@ -45,7 +45,7 @@ fun Odometer(
     val drumW = with(density) { (size * 0.78f).sp.toDp() }
     val drumH = with(density) { (size * 1.3f).sp.toDp() }
     val style = TextStyle(fontFamily = SpaceGrotesk, fontWeight = FontWeight.Bold, fontSize = size.sp)
-    val spoken = "${tenths / 10}.${tenths % 10} ${if (unit == "mi") "miles" else unit.orEmpty()}"
+    val spoken = listOfNotNull("${tenths / 10}.${tenths % 10}", if (unit == "mi") "miles" else unit).joinToString(" ")
     Row(
         modifier.clearAndSetSemantics { contentDescription = spoken },
         horizontalArrangement = Arrangement.spacedBy(4.dp),
