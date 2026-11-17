@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tracking_channel_recording">Trip recording</string>
+    <string name="tracking_channel_recording_description">Shows while a trip records. Location is used only during a trip.</string>
+    <string name="tracking_channel_drive">Drive detection</string>
+    <string name="tracking_channel_drive_description">Suggests logging a trip when you start driving.</string>
+    <string name="tracking_recording_title">Recording trip · %1$s · %2$s</string>
+    <string name="tracking_paused_title">Trip paused · %1$s · %2$s</string>
+    <string name="tracking_recording_text">Location is used only while this trip records.</string>
+    <string name="tracking_paused_text">Location is off while the trip is paused.</string>
+    <string name="tracking_minutes">%1$d min</string>
+    <string name="tracking_hours_minutes">%1$d h %2$d min</string>
+    <string name="tracking_action_pause">Pause</string>
+    <string name="tracking_action_resume">Resume</string>
+    <string name="tracking_action_stop">Stop</string>
+    <string name="tracking_drive_title">Drive detected</string>
+    <string name="tracking_drive_text">Looks like you\'re driving. Tap to log this as a business trip. Nothing records until you start it.</string>
+    <string name="tracking_action_start_trip">Start trip</string>
+    <string name="tracking_action_not_business">Not business</string>
+    <string name="tracking_stopped_title">Trip stopped</string>
+    <string name="tracking_stopped_text">Location access was turned off, so the trip was saved up to that point.</string>
+</resources>

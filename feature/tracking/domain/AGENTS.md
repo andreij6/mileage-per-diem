@@ -8,7 +8,7 @@ Pure Kotlin. Trip recording: start/pause/resume/stop, fix filtering, track simpl
 - Pure: `DistanceFilter` (drops accuracy > 35 m, implied speed > 70 m/s, stationary jitter inside the accuracy radius; exposes `total`, `accepted`, `dropped`), `TrackSimplifier` (Douglas–Peucker, 5 m), `RecordingPolicyResolver` (ACCURATE → high; still > 2 min → balanced; SAVER/power-save/≤ 20% → saver; else high).
 
 ## Use cases
-`StartTripUseCase` (returns the active trip id if one exists), `PauseTripUseCase`, `ResumeTripUseCase`, `StopTripUseCase` (returns the trip id to finalize), `FinalizeTripUseCase(tripId, interrupted)` (idempotent; interrupted trips end at their last point), `RecordFailureUseCase` (drops an active trip that has no points), `ObserveRecordingStateUseCase`, `ObserveRecordingPolicyUseCase`, `ObserveDriveDetectionEnabledUseCase`, `ObserveLiveUpdateEnabledUseCase`.
+`StartTripUseCase` (returns the active trip id if one exists), `PauseTripUseCase`, `ResumeTripUseCase`, `StopTripUseCase` (returns the trip id to finalize), `FinalizeTripUseCase(tripId, interrupted)` (idempotent; interrupted trips end at their last point), `RecordFailureUseCase` (drops an active trip that has no points), `ObserveRecordingStateUseCase`, `ObserveRecordingPolicyUseCase`, `ObserveDriveDetectionEnabledUseCase`, `ObserveLiveUpdateEnabledUseCase`, `RecordTrackingPermissionUseCase` (tracks `permission_result` from the live-trip permission flow), `ObserveDeviceStateUseCase` (battery % for the live-trip policy chip), `ResumeInterruptedTripUseCase` (re-seeds the state store from stored points and restarts the service for a trip left active by process death).
 
 ## Dependencies
 `core:*` JVM modules, `feature:trips:domain`, `feature:settings:domain` (api).

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="live_recording">Recording</string>
+    <string name="live_paused">Paused</string>
+    <string name="live_starting">Starting…</string>
+    <string name="live_gps">GPS ±%1$d m</string>
+    <string name="live_gps_searching">Finding GPS</string>
+    <string name="live_elapsed_speed">%1$s · %2$d mph</string>
+    <string name="live_policy_high">High accuracy</string>
+    <string name="live_policy_balanced">Balanced</string>
+    <string name="live_policy_saver">Saver</string>
+    <string name="live_policy_battery">%1$s · %2$d%%</string>
+    <string name="live_no_purpose">Add purpose later</string>
+    <string name="live_pause">Pause trip</string>
+    <string name="live_resume">Resume trip</string>
+    <string name="live_slide_to_end">Slide to end trip</string>
+    <string name="live_end_trip">End trip</string>
+    <string name="live_trip_ended">Trip ended</string>
+    <string name="live_stats_spoken">%1$s miles, %2$s, %3$s elapsed</string>
+    <string name="live_route_description">Live route, %1$s miles so far</string>
+    <string name="receipt_saved">Trip saved</string>
+    <string name="receipt_title">TRIP RECEIPT</string>
+    <string name="receipt_distance">Distance</string>
+    <string name="receipt_duration">Duration</string>
+    <string name="receipt_rate_irs">IRS rate (from %1$s)</string>
+    <string name="receipt_rate_custom">Company rate</string>
+    <string name="receipt_rate_value">× %1$s</string>
+    <string name="receipt_purpose">Purpose</string>
+    <string name="receipt_purpose_none">Not set</string>
+    <string name="receipt_total">TOTAL</string>
+    <string name="receipt_edit">Edit details</string>
+    <string name="receipt_done">Done</string>
+    <string name="receipt_route_description">%1$s route</string>
+    <string name="duration_minutes">%1$d min</string>
+    <string name="duration_hours_minutes">%1$d h %2$d min</string>
+    <string name="interrupted_title">Trip interrupted</string>
+    <string name="interrupted_body">Recording stopped at %1$s after %2$s. The phone restarted or Android closed the app.</string>
+    <string name="interrupted_resume">Resume recording</string>
+    <string name="interrupted_finish">Finish at %1$s</string>
+    <string name="interrupted_discard">Discard trip</string>
+</resources>

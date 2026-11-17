@@ -18,6 +18,9 @@ interface TripDao {
     @Query("DELETE FROM trip WHERE id = :id")
     suspend fun delete(id: Long)
 
+    @Query("DELETE FROM trip")
+    suspend fun deleteAll()
+
     @Query("SELECT * FROM trip WHERE id = :id")
     suspend fun get(id: Long): TripEntity?
 
@@ -36,6 +39,6 @@ interface TripDao {
     @Query("SELECT * FROM trip WHERE status IN ('RECORDING','PAUSED') LIMIT 1")
     fun observeActive(): Flow<TripEntity?>
 
-    @Query("SELECT * FROM trip WHERE needsReview = 1 AND status IN ('DONE','MANUAL') ORDER BY startedAt ASC")
+    @Query("SELECT * FROM trip WHERE needsReview = 1 AND status IN ('DONE','MANUAL') ORDER BY startedAt DESC")
     fun observeNeedingReview(): Flow<List<TripEntity>>
 }

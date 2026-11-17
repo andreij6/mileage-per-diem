@@ -12,6 +12,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.aijones.mileage.core.analytics.Analytics
 import com.aijones.mileage.demo.DemoSeeder
+import com.aijones.mileage.feature.tracking.data.TrackingInitializer
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -29,6 +30,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 class MainActivity : ComponentActivity() {
     @Inject lateinit var analytics: Analytics
     @Inject lateinit var demoSeeder: dagger.Lazy<DemoSeeder>
+    @Inject lateinit var trackingInitializer: dagger.Lazy<TrackingInitializer>
 
     private val viewModel: AppViewModel by viewModels()
     private val intents = MutableStateFlow<Intent?>(null)
@@ -57,6 +59,11 @@ class MainActivity : ComponentActivity() {
                 MileageAppUi(ready.onboarded, intents, onIntentHandled = { intents.value = null })
             }
         }
+    }
+
+    override fun onPostResume() {
+        super.onPostResume()
+        window.decorView.post { trackingInitializer.get().start() }
     }
 
     override fun onNewIntent(intent: Intent) {

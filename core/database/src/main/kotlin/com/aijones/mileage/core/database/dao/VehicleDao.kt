@@ -23,4 +23,10 @@ interface VehicleDao {
 
     @Query("UPDATE vehicle SET isDefault = (id = :id)")
     suspend fun setDefault(id: Long)
+
+    @Query("UPDATE vehicle SET name = :name WHERE id = :id")
+    suspend fun rename(id: Long, name: String)
+
+    @Query("SELECT COUNT(*) FROM vehicle")
+    suspend fun count(): Int
 }

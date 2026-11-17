@@ -41,8 +41,9 @@ fun Odometer(
 ) {
     val whole = (tenths / 10).toString().padStart(wholeDigits, '0')
     val tenth = (tenths % 10).toString()
-    val drumW = (size * 0.78f).dp
-    val drumH = (size * 1.3f).dp
+    val density = LocalDensity.current
+    val drumW = with(density) { (size * 0.78f).sp.toDp() }
+    val drumH = with(density) { (size * 1.3f).sp.toDp() }
     val style = TextStyle(fontFamily = SpaceGrotesk, fontWeight = FontWeight.Bold, fontSize = size.sp)
     val spoken = "${tenths / 10}.${tenths % 10} ${if (unit == "mi") "miles" else unit.orEmpty()}"
     Row(

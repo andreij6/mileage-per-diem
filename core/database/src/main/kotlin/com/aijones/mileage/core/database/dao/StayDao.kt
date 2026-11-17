@@ -14,6 +14,9 @@ interface StayDao {
     @Query("DELETE FROM stay WHERE id = :id")
     suspend fun delete(id: Long)
 
+    @Query("DELETE FROM stay")
+    suspend fun deleteAll()
+
     @Query("SELECT * FROM stay WHERE checkOutEpochDay >= :fromEpochDay AND checkInEpochDay <= :toEpochDay ORDER BY checkInEpochDay")
     fun observeOverlapping(fromEpochDay: Long, toEpochDay: Long): Flow<List<StayEntity>>
 }

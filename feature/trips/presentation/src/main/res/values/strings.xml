@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="trips_title">Trips</string>
+    <string name="trips_offline">Offline</string>
+    <string name="trips_reimbursable_month">Reimbursable this month</string>
+    <string name="trips_insights">Insights</string>
+    <plurals name="trips_count">
+        <item quantity="one">%d trip</item>
+        <item quantity="other">%d trips</item>
+    </plurals>
+    <string name="trips_rate_per_mile">%1$s / mi</string>
+    <string name="trips_irs_rate_line">IRS rate · %1$s per mile</string>
+    <string name="trips_start_trip">Start trip</string>
+    <plurals name="trips_need_purpose">
+        <item quantity="one">%d trip needs a purpose</item>
+        <item quantity="other">%d trips need a purpose</item>
+    </plurals>
+    <string name="trips_review_banner_body">Swipe to sort business from personal</string>
+    <string name="trips_review">Review</string>
+    <string name="trips_recent">Recent trips</string>
+    <string name="trips_see_all">See all</string>
+    <string name="trips_empty_title">No trips yet</string>
+    <string name="trips_empty_body">Tap Start trip when you head out. Your first trip shows up here.</string>
+    <string name="trips_add_past">Add a past trip</string>
+
+    <string name="trips_today">Today</string>
+    <string name="trips_yesterday">Yesterday</string>
+    <string name="trips_route">%1$s → %2$s</string>
+    <string name="trips_unknown_place">Unknown place</string>
+    <string name="trips_dot">%1$s · %2$s</string>
+    <string name="trips_dot3">%1$s · %2$s · %3$s</string>
+    <string name="trips_no_purpose">No purpose</string>
+    <string name="trips_route_description">%1$s route from %2$s to %3$s</string>
+
+    <string name="trips_review_title">Review trips</string>
+    <string name="trips_review_progress">%1$d of %2$d reviewed</string>
+    <string name="trips_stamp_business">BUSINESS</string>
+    <string name="trips_stamp_personal">PERSONAL</string>
+    <string name="trips_if_business">if it\'s business</string>
+    <string name="trips_purpose">Purpose</string>
+    <string name="trips_personal">Personal</string>
+    <string name="trips_business">Business</string>
+    <string name="trips_undo">Undo</string>
+    <string name="trips_mark_business">Mark business</string>
+    <string name="trips_mark_personal">Mark personal</string>
+    <string name="trips_review_hint">Swipe right for business, left for personal</string>
+    <string name="trips_review_done_title">All sorted</string>
+    <string name="trips_review_done_body">Every trip has a category. New trips that need a purpose show up here.</string>
+    <string name="trips_review_done_action">Back to trips</string>
+
+    <string name="trips_all_title">All trips</string>
+    <string name="trips_search">Search trips</string>
+    <string name="trips_search_hint">Place or purpose</string>
+    <string name="trips_filter_business">Business</string>
+    <string name="trips_filter_all_vehicles">All vehicles</string>
+    <string name="trips_summary">%1$s · %2$s</string>
+    <string name="trips_add_trip">Add trip</string>
+    <string name="trips_none_match">No trips match these filters.</string>
+
+    <string name="trips_detail_title">Trip</string>
+    <string name="trips_more">More options</string>
+    <string name="trips_replay_play">Play route replay</string>
+    <string name="trips_replay_pause">Pause route replay</string>
+    <string name="trips_replay_hint">Replay · drag to scrub</string>
+    <string name="trips_replay_state">%1$s, %2$d miles per hour</string>
+    <string name="trips_speed_chip">%1$s · %2$d mph</string>
+    <string name="trips_distance">Distance</string>
+    <string name="trips_duration">Duration</string>
+    <string name="trips_at_rate">At %1$s / mi</string>
+    <string name="trips_minutes">%1$d min</string>
+    <string name="trips_hours_minutes">%1$d h %2$d min</string>
+    <string name="trips_category">Category</string>
+    <string name="trips_vehicle">Vehicle</string>
+    <string name="trips_none">None</string>
+    <string name="trips_edit">Edit</string>
+    <string name="trips_add_to_report">Add to report</string>
+    <string name="trips_delete_trip">Delete trip</string>
+    <string name="trips_delete_confirm_title">Delete this trip?</string>
+    <string name="trips_delete_confirm_body">The trip and its route are removed from this phone. This can\'t be undone.</string>
+    <string name="trips_delete">Delete</string>
+    <string name="trips_cancel">Cancel</string>
+    <string name="trips_manual_entry">Manual trip</string>
+
+    <string name="trips_edit_title">Edit trip</string>
+    <string name="trips_notes">Notes</string>
+    <string name="trips_distance_helper">Recorded %1$s. If you change it, the report marks the trip as edited.</string>
+    <plurals name="trips_changes">
+        <item quantity="one">%d change</item>
+        <item quantity="other">%d changes</item>
+    </plurals>
+    <string name="trips_no_changes">No changes</string>
+    <string name="trips_save">Save</string>
+
+    <string name="trips_add_title">Add a past trip</string>
+    <string name="trips_date">Date</string>
+    <string name="trips_from">From</string>
+    <string name="trips_to">To</string>
+    <string name="trips_round_trip">Round trip</string>
+    <string name="trips_round_trip_body">Doubles the distance</string>
+    <string name="trips_reimbursement">Reimbursement</string>
+    <string name="trips_estimate_line">%1$s × %2$s\nIRS rate on %3$s</string>
+    <string name="trips_ok">OK</string>
+</resources>
