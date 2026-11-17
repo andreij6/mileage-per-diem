@@ -19,6 +19,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.time.Clock
+import com.aijones.mileage.core.model.distanceTo
 import java.time.Duration
 import javax.inject.Inject
 
@@ -51,7 +52,10 @@ class RecordingSession @Inject constructor(
             if (buffer.size >= BATCH_SIZE || Duration.between(lastFlush, clock.instant()) >= BATCH_INTERVAL) flush()
         }
 
-        fun onFix(policy: RecordingPolicy, fix: Fix) {
+        var previous: Fix? = null
+        fun onFix(policy: RecordingPolicy, incoming: Fix) {
+            val fix = incoming.speedMps?.let { incoming } ?: incoming.copy(speedMps = previous?.let { derivedSpeed(it, incoming) })
+            previous = incoming
             filter.accept(fix)
             buffer += fix.toTrackPoint()
             store.update { s ->
@@ -91,3 +95,8 @@ class RecordingSession @Inject constructor(
     }
 }
 
+internal fun derivedSpeed(from: Fix, to: Fix): Float? {
+    val seconds = Duration.between(from.t, to.t).toMillis() / 1_000.0
+    if (seconds <= 0.0) return null
+    return (from.point.distanceTo(to.point).meters / seconds).toFloat()
+}

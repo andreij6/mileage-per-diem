@@ -33,6 +33,8 @@ dependencies {
 val startupBudgetMs = (findProperty("startupBudgetMs") as String?)?.toDouble() ?: 600.0
 
 tasks.register("verifyStartupBudget") {
+    val budget = startupBudgetMs
+    mustRunAfter("connectedBenchmarkReleaseAndroidTest")
     group = "verification"
     description = "Fails when the median cold startup with a baseline profile is above the budget."
     val results = layout.buildDirectory.dir("outputs/connected_android_test_additional_output")
@@ -50,7 +52,7 @@ tasks.register("verifyStartupBudget") {
         }
         check(medians.isNotEmpty()) { "No baseline-profile startup result in $files" }
         val worst = medians.max()
-        logger.lifecycle("Cold startup median (baseline profile): ${"%.1f".format(worst)} ms, budget $startupBudgetMs ms")
-        check(worst <= startupBudgetMs) { "Startup regression: median TTID $worst ms > budget $startupBudgetMs ms" }
+        println("Cold startup median (baseline profile): ${"%.1f".format(worst)} ms, budget $budget ms")
+        check(worst <= budget) { "Startup regression: median TTID $worst ms > budget $budget ms" }
     }
 }
